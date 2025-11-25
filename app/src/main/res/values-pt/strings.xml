@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Guitarra</string>
+    <string name="menu_title">Aprendizado de Guitarra</string>
+    <string name="menu_item_1">Guitarra</string>
+    <string name="menu_item_2">Aprender a tocar</string>
+    <string name="menu_item_3">Lista de gravações</string>
+    <string name="language">Idioma</string>
+    <string name="english">Inglês</string>
+    <string name="mail">Email</string>
+    <string name="share_this_app">Compartilhar este app</string>
+    <string name="feedback">Feedback</string>
+    <string name="privacy_policy">Política de Privacidade</string>
+    <string name="general">Geral</string>
+    <string name="settings">Configurações</string>
+    <string name="record_playlist">Lista de reprodução de gravações</string>
+    <string name="guitar_record">Gravação de guitarra</string>
+    <string name="tutorial">Gravação do microfone</string>
+    <string name="rename">Renomear</string>
+    <string name="delete">Excluir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Salvar</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">Tem certeza de que deseja excluir este item?</string>
+    <string name="coming_soon">Em breve!</string>
+    <string name="policy">Política</string>
+    <string name="save_record">Guardar gravação</string>
+    <string name="do_you_want_to_save_this_record">Deseja guardar esta gravação?</string>
+    <string name="cancel_successfully">Cancelado com sucesso</string>
+    <string name="record_saved_successfully">Gravação guardada com sucesso</string>
+    <string name="choose_hand">Escolher mão</string>
+    <string name="metronome">Metrónomo</string>
+    <string name="tutorial_complete">Tutorial concluído</string>
+    <string name="rename_complete">Renomeação concluída</string>
+    <string name="delete_complete">Eliminação concluída</string>
+
+    <string name="show_index">Mostrar índice</string>
+    <string name="loading">Carregando...</string>
+    <string name="previous">Anterior</string>
+    <string name="done">Concluído</string>
+    <string name="next">Próximo</string>
+    <string name="click_on_a_recording_to_play_it">Clique em uma gravação para reproduzi-la</string>
+    <string name="click_on_the_play_button_to_start_tutorial">Clique no botão de reprodução para iniciar o tutorial</string>
+    <string name="click_on_options_icon_to_rename_or_delete_the_recording">
+        Clique no ícone de opções para renomear ou excluir a gravação
+    </string>
+    <string name="you_don_t_have_any_keys_record_files_yet">Você ainda não tem nenhum arquivo de gravação de teclas!</string>
+    <string name="open_guitar">Abrir guitarra</string>
+    <string name="no_browser_found">Nenhum navegador encontrado</string>
+    <string name="press_on_green_area_to_play">Pressione na área verde para tocar</string>
+
+    <string name="terms_of_use">
+        O aplicativo Guitar é fornecido para ajudar os usuários a praticar e simular sons de guitarra. Ele oferece ferramentas para exercícios de dedos, prática de acordes e execução experimental, e tem como objetivo ajudar os usuários a melhorar suas habilidades na guitarra. O aplicativo destina-se a fins de entretenimento e aprendizado e não garante resultados de prática, nem substitui orientação profissional.
+        \nAo instalar ou usar o aplicativo Guitar, os usuários reconhecem que leram, compreenderam e concordam em cumprir estes Termos de Uso. Se você não concorda com qualquer parte destes termos, interrompa o uso do aplicativo imediatamente.
+        \nO aplicativo Guitar não exige registro de conta e não armazena informações pessoais. Todas as operações ocorrem inteiramente no dispositivo. O aplicativo não coleta dados, não rastreia o comportamento do usuário, não solicita e-mails ou quaisquer identificadores pessoais e não envia dados para nenhum servidor. Todas as configurações e informações de prática são armazenadas localmente no dispositivo.
+        \nOs usuários podem utilizar o aplicativo para aprendizado pessoal, entretenimento ou prática; usar os recursos de simulação e prática disponíveis; e fornecer feedback ou relatar problemas ao desenvolvedor, se necessário. No entanto, os usuários não estão autorizados a modificar, interferir, copiar, distribuir ou reutilizar o aplicativo sem permissão; usar o aplicativo para fins ilegais, prejudiciais ou disruptivos; realizar engenharia reversa, hackear ou contornar mecanismos de proteção do aplicativo; ou utilizar o aplicativo de maneira que cause ruído excessivo ou impacto negativo a terceiros.
+        \nO aplicativo Guitar não inclui compras dentro do aplicativo, não cobra taxas de nenhuma forma e todos os recursos são fornecidos gratuitamente.
+        \nTodas as interfaces, código-fonte, conteúdo das lições, sons de guitarra, imagens e ícones no aplicativo são de propriedade do desenvolvedor. Os usuários não podem copiar, usar ou distribuir esses elementos para fins comerciais sem autorização.
+        \nO desenvolvedor não é responsável por lesões nas mãos, pulsos ou outras partes do corpo decorrentes de prática incorreta; danos causados pelo uso do aplicativo em ambientes inseguros; falhas, erros ou interrupções no aplicativo; ou perda de dados devido à exclusão do aplicativo ou problemas no dispositivo. O aplicativo é fornecido “como está”, sem quaisquer garantias.
+        \nO desenvolvedor pode atualizar os Termos de Uso a qualquer momento. Continuar a usar o aplicativo após a atualização dos termos constitui aceitação dos termos revisados. O desenvolvedor também reserva-se o direito de suspender ou encerrar o acesso do usuário caso sejam detectadas violações destes termos.
+        \nSe tiver alguma dúvida, preocupação ou feedback, entre em contato por e-mail: doviethavk@gmail.com
+    </string>
+</resources>

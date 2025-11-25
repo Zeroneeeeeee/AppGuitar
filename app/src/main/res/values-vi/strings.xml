@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Guitar</string>
+    <string name="menu_title">Chơi Guitar</string>
+    <string name="menu_item_1">Guitar</string>
+    <string name="menu_item_2">Học cách chơi</string>
+    <string name="menu_item_3">Danh sách thu</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="english">English</string>
+    <string name="mail">Mail</string>
+    <string name="share_this_app">Chia sẻ</string>
+    <string name="feedback">Feedback</string>
+    <string name="privacy_policy">Điều khoản</string>
+    <string name="general">Cài đặt chung</string>
+    <string name="settings">Cài đặt</string>
+    <string name="record_playlist">Danh sách thu</string>
+    <string name="guitar_record">Thu từ guitar</string>
+    <string name="tutorial">Luyện tập</string>
+    <string name="rename">Sửa tên</string>
+    <string name="delete">Xóa</string>
+    <string name="cancel">Hủy</string>
+    <string name="save">Lưu</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">Bạn có chắc muốn xóa bản ghi này không?</string>
+    <string name="coming_soon">Chưa cập nhật</string>
+    <string name="policy">Điều khoản sử dụng</string>
+    <string name="save_record">Lưu bản ghi</string>
+    <string name="do_you_want_to_save_this_record">Bạn có muốn lưu bản ghi này không?</string>
+    <string name="cancel_successfully">Hủy thành công</string>
+    <string name="record_saved_successfully">Lưu bản ghi thành công</string>
+    <string name="choose_hand">Chọn tay</string>
+    <string name="metronome">Máy đếm nhịp</string>
+    <string name="tutorial_complete">Hoàn thành hướng dẫn</string>
+    <string name="rename_complete">Đổi tên thành công</string>
+    <string name="delete_complete">Xóa thành công</string>
+
+    <string name="show_index">Hiển thị thứ tự dây</string>
+    <string name="loading">Đang tải...</string>
+    <string name="previous">Trước</string>
+    <string name="done">Hoàn tất</string>
+    <string name="next">Tiếp</string>
+    <string name="click_on_a_recording_to_play_it">Nhấn vào bản ghi để nghe thử</string>
+    <string name="click_on_the_play_button_to_start_tutorial">Nhấn nút phát để bắt đầu hướng dẫn</string>
+    <string name="click_on_options_icon_to_rename_or_delete_the_recording">
+        Nhấn vào biểu tượng tùy chọn để đổi tên hoặc xóa bản ghi
+    </string>
+    <string name="you_don_t_have_any_keys_record_files_yet">Bạn chưa có bản ghi nào!</string>
+    <string name="open_guitar">Chơi guitar</string>
+    <string name="no_browser_found">Không tìm thấy trình duyệt</string>
+    <string name="press_on_green_area_to_play">Nhấn theo vùng màu xanh</string>
+
+    <string name="terms_of_use">
+        Ứng dụng Guitar được cung cấp nhằm hỗ trợ người dùng luyện tập và mô phỏng tiếng đàn guitar, cung cấp các công cụ luyện ngón, bấm hợp âm hoặc chơi thử, cũng như giúp người dùng nâng cao kỹ năng chơi đàn. Ứng dụng mang tính chất giải trí và học tập, không đảm bảo kết quả luyện tập và không thay thế cho hướng dẫn chuyên nghiệp.
+        \nBằng cách cài đặt hoặc sử dụng ứng dụng Guitar, người dùng xác nhận rằng đã đọc, hiểu và đồng ý tuân theo toàn bộ Điều khoản Sử dụng này. Nếu không đồng ý với bất kỳ nội dung nào, người dùng phải ngừng sử dụng ứng dụng ngay lập tức.
+        \nỨng dụng Guitar không yêu cầu tạo tài khoản và cũng không lưu trữ bất kỳ thông tin cá nhân nào của người dùng. Mọi hoạt động diễn ra hoàn toàn trên thiết bị, không thu thập dữ liệu, không theo dõi hành vi, không yêu cầu email hay thông tin định danh, và không gửi dữ liệu về bất kỳ máy chủ nào. Nếu ứng dụng có lưu lại cài đặt hoặc thông tin luyện tập, những thông tin này chỉ tồn tại cục bộ trên thiết bị của người dùng.
+        \nTrong quá trình sử dụng, người dùng được phép sử dụng ứng dụng cho mục đích học tập, giải trí hoặc luyện tập cá nhân; sử dụng các tính năng mô phỏng và luyện tập có sẵn; và gửi phản hồi hoặc báo lỗi cho nhà phát triển nếu cần. Tuy nhiên, người dùng không được sửa đổi, can thiệp, sao chép, phân phối hoặc tái sử dụng ứng dụng khi chưa có sự cho phép; không được sử dụng ứng dụng vào mục đích phi pháp, gây hại hoặc làm phiền người khác; không được giải mã, hack hay phá vỡ các cơ chế bảo vệ của ứng dụng; và không được sử dụng ứng dụng theo cách gây tiếng ồn lớn hoặc ảnh hưởng đến môi trường xung quanh.
+        \nỨng dụng Guitar không có mua hàng trong ứng dụng, không thu phí dưới bất kỳ hình thức nào và toàn bộ tính năng đều được cung cấp miễn phí.
+        \nTất cả giao diện, mã nguồn, nội dung bài học, âm thanh guitar, hình ảnh và biểu tượng trong ứng dụng đều thuộc quyền sở hữu của nhà phát triển. Người dùng không được phép sao chép, sử dụng hoặc phân phối lại cho mục đích thương mại khi chưa có sự cho phép.
+        \nNhà phát triển không chịu trách nhiệm đối với các chấn thương tay, cổ tay hoặc bất kỳ vấn đề thể chất nào do người dùng luyện tập sai kỹ thuật; các thiệt hại xảy ra khi sử dụng ứng dụng trong môi trường không an toàn; sự cố, lỗi hoặc gián đoạn ứng dụng; và việc mất dữ liệu do người dùng xóa ứng dụng hoặc do thiết bị gặp sự cố. Ứng dụng được cung cấp theo trạng thái “nguyên trạng” mà không có bất kỳ đảm bảo nào.
+        \nNhà phát triển có quyền sửa đổi Điều khoản Sử dụng vào bất kỳ thời điểm nào. Việc tiếp tục sử dụng ứng dụng sau khi điều khoản được cập nhật đồng nghĩa với việc người dùng chấp nhận các thay đổi đó. Nhà phát triển cũng có quyền tạm ngừng hoặc chấm dứt quyền truy cập của người dùng nếu phát hiện hành vi vi phạm các điều khoản đã nêu.
+        \nNếu có câu hỏi, thắc mắc hoặc góp ý, người dùng có thể liên hệ qua email: doviethavk@gmail.com.
+    </string>
+</resources>

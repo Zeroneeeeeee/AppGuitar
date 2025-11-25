@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Guitare</string>
+    <string name="menu_title">Apprentissage de la guitare</string>
+    <string name="menu_item_1">Guitare</string>
+    <string name="menu_item_2">Apprendre à jouer</string>
+    <string name="menu_item_3">Liste des enregistrements</string>
+    <string name="language">Langue</string>
+    <string name="english">Anglais</string>
+    <string name="mail">Courriel</string>
+    <string name="share_this_app">Partager cette appli</string>
+    <string name="feedback">Commentaires</string>
+    <string name="privacy_policy">Politique de confidentialité</string>
+    <string name="general">Général</string>
+    <string name="settings">Paramètres</string>
+    <string name="record_playlist">Liste de lecture des enregistrements</string>
+    <string name="guitar_record">Enregistrement de guitare</string>
+    <string name="tutorial">Enregistrement micro</string>
+    <string name="rename">Renommer</string>
+    <string name="delete">Supprimer</string>
+    <string name="cancel">Annuler</string>
+    <string name="save">Enregistrer</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">Êtes-vous sûr de vouloir supprimer cet élément ?</string>
+    <string name="coming_soon">Bientôt disponible !</string>
+    <string name="policy">Politique</string>
+    <string name="save_record">Enregistrer l’enregistrement</string>
+    <string name="do_you_want_to_save_this_record">Voulez-vous enregistrer cet enregistrement?</string>
+    <string name="cancel_successfully">Annulation réussie</string>
+    <string name="record_saved_successfully">Enregistrement sauvegardé avec succès</string>
+    <string name="choose_hand">Choisissez une main</string>
+    <string name="metronome">Métronome</string>
+    <string name="tutorial_complete">Tutoriel terminé</string>
+    <string name="rename_complete">Renommage terminé</string>
+    <string name="delete_complete">Suppression terminée</string>
+
+    <string name="show_index">Afficher l’index</string>
+    <string name="loading">Chargement…</string>
+    <string name="previous">Précédent</string>
+    <string name="done">Terminé</string>
+    <string name="next">Suivant</string>
+    <string name="click_on_a_recording_to_play_it">Cliquez sur un enregistrement pour le lire</string>
+    <string name="click_on_the_play_button_to_start_tutorial">Cliquez sur le bouton lecture pour commencer le tutoriel</string>
+    <string name="click_on_options_icon_to_rename_or_delete_the_recording">
+        Cliquez sur l’icône d’options pour renommer ou supprimer l’enregistrement
+    </string>
+    <string name="you_don_t_have_any_keys_record_files_yet">Vous n’avez encore aucun fichier d’enregistrement de touches !</string>
+    <string name="open_guitar">Ouvrir la guitare</string>
+    <string name="no_browser_found">Aucun navigateur trouvé</string>
+    <string name="press_on_green_area_to_play">Appuyez sur la zone verte pour jouer</string>
+
+
+
+    <string name="terms_of_use">
+        L’application Guitar est fournie pour aider les utilisateurs à pratiquer et à simuler des sons de guitare. Elle offre des outils pour les exercices de doigts, la pratique des accords et des essais de jeu, et vise à aider les utilisateurs à améliorer leurs compétences en guitare. L’application est destinée à des fins de divertissement et d’apprentissage et ne garantit pas les résultats de pratique, ni ne remplace les conseils professionnels.
+        \nEn installant ou en utilisant l’application Guitar, les utilisateurs reconnaissent avoir lu, compris et accepté de se conformer à ces Conditions d’utilisation. Si vous n’acceptez pas une partie de ces conditions, veuillez cesser immédiatement d’utiliser l’application.
+        \nL’application Guitar ne nécessite pas d’inscription et ne stocke aucune information personnelle. Toutes les opérations se déroulent entièrement sur l’appareil. L’application ne collecte aucune donnée, ne suit pas le comportement des utilisateurs, ne demande pas d’e-mails ni d’identifiants personnels, et n’envoie aucune donnée à un serveur. Tous les paramètres ou informations de pratique sont stockés localement sur l’appareil.
+        \nLes utilisateurs sont autorisés à utiliser l’application à des fins d’apprentissage personnel, de divertissement ou de pratique ; à utiliser les fonctionnalités de simulation et de pratique disponibles ; et à fournir des commentaires ou signaler des problèmes au développeur si nécessaire. Toutefois, il est interdit de modifier, d’interférer avec, de copier, de distribuer ou de réutiliser l’application sans autorisation ; d’utiliser l’application à des fins illégales, nuisibles ou perturbatrices ; de faire de l’ingénierie inverse, de pirater ou de contourner les mécanismes de protection de l’application ; ou d’utiliser l’application d’une manière causant un bruit excessif ou impactant négativement autrui.
+        \nL’application Guitar n’inclut aucun achat intégré, ne facture aucun frais sous quelque forme que ce soit, et toutes les fonctionnalités sont fournies gratuitement.
+        \nToutes les interfaces, le code source, le contenu des leçons, les sons de guitare, les images et les icônes de l’application appartiennent au développeur. Il est interdit aux utilisateurs de les copier, de les utiliser ou de les distribuer à des fins commerciales sans autorisation.
+        \nLe développeur n’est pas responsable des blessures aux mains, poignets ou autres parties du corps résultant d’une pratique incorrecte ; des dommages causés par l’utilisation de l’application dans des environnements non sécuritaires ; des dysfonctionnements, erreurs ou interruptions de l’application ; ou de la perte de données due à la suppression de l’application ou à des problèmes de l’appareil. L’application est fournie « telle quelle » sans aucune garantie.
+        \nLe développeur peut mettre à jour les Conditions d’utilisation à tout moment. Continuer à utiliser l’application après la mise à jour des conditions constitue une acceptation des conditions révisées. Le développeur se réserve également le droit de suspendre ou de terminer l’accès des utilisateurs en cas de violation détectée des conditions.
+        \nSi vous avez des questions, des préoccupations ou des commentaires, veuillez nous contacter par courriel : store@gambi.global.
+    </string>
+</resources>

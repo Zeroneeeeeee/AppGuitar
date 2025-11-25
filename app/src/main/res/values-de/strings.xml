@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gitarre</string>
+    <string name="menu_title">Gitarre lernen</string>
+    <string name="menu_item_1">Gitarre</string>
+    <string name="menu_item_2">Spiel lernen</string>
+    <string name="menu_item_3">Aufnahmeliste</string>
+    <string name="language">Sprache</string>
+    <string name="english">Englisch</string>
+    <string name="mail">E-Mail</string>
+    <string name="share_this_app">Diese App teilen</string>
+    <string name="feedback">Feedback</string>
+    <string name="privacy_policy">Datenschutzrichtlinie</string>
+    <string name="general">Allgemein</string>
+    <string name="settings">Einstellungen</string>
+    <string name="record_playlist">Aufnahmeliste</string>
+    <string name="guitar_record">Gitarrenaufnahme</string>
+    <string name="tutorial">Mikrofonaufnahme</string>
+    <string name="rename">Umbenennen</string>
+    <string name="delete">Löschen</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="save">Speichern</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">Möchten Sie dieses Element wirklich löschen?</string>
+    <string name="coming_soon">Kommt bald!</string>
+    <string name="policy">Richtlinien</string>
+    <string name="save_record">Aufnahme speichern</string>
+    <string name="do_you_want_to_save_this_record">Möchten Sie diese Aufnahme speichern?</string>
+    <string name="cancel_successfully">Erfolgreich abgebrochen</string>
+    <string name="record_saved_successfully">Aufnahme erfolgreich gespeichert</string>
+    <string name="choose_hand">Hand auswählen</string>
+    <string name="metronome">Metronom</string>
+    <string name="tutorial_complete">Tutorial abgeschlossen</string>
+    <string name="rename_complete">Umbenennung abgeschlossen</string>
+    <string name="delete_complete">Löschung abgeschlossen</string>
+
+    <string name="show_index">Index anzeigen</string>
+    <string name="loading">Wird geladen...</string>
+    <string name="previous">Zurück</string>
+    <string name="done">Fertig</string>
+    <string name="next">Weiter</string>
+    <string name="click_on_a_recording_to_play_it">Klicken Sie auf eine Aufnahme, um sie abzuspielen</string>
+    <string name="click_on_the_play_button_to_start_tutorial">Klicken Sie auf die Wiedergabetaste, um das Tutorial zu starten</string>
+    <string name="click_on_options_icon_to_rename_or_delete_the_recording">
+        Klicken Sie auf das Optionssymbol, um die Aufnahme umzubenennen oder zu löschen
+    </string>
+    <string name="you_don_t_have_any_keys_record_files_yet">Sie haben noch keine Tastenaufnahmen!</string>
+    <string name="open_guitar">Gitarre öffnen</string>
+    <string name="no_browser_found">Kein Browser gefunden</string>
+    <string name="press_on_green_area_to_play">Drücken Sie auf den grünen Bereich, um zu spielen</string>
+
+
+
+    <string name="terms_of_use">
+        Die Guitar-App wird bereitgestellt, um Benutzern beim Üben und Simulieren von Gitarrentönen zu helfen. Sie bietet Werkzeuge für Fingerübungen, Akkordpraxis und Probe-Spiel und soll Benutzern helfen, ihre Gitarrenfähigkeiten zu verbessern. Die App ist für Unterhaltungs- und Lernzwecke gedacht und garantiert keine Übungsergebnisse, noch ersetzt sie professionelle Anleitung.
+        \nDurch die Installation oder Nutzung der Guitar-App bestätigen die Benutzer, dass sie diese Nutzungsbedingungen gelesen, verstanden und akzeptiert haben. Wenn Sie mit einem Teil dieser Bedingungen nicht einverstanden sind, hören Sie bitte sofort auf, die App zu verwenden.
+        \nDie Guitar-App erfordert keine Registrierung und speichert keine persönlichen Daten. Alle Vorgänge erfolgen vollständig auf dem Gerät. Die App sammelt keine Daten, verfolgt das Benutzerverhalten nicht, verlangt keine E-Mail-Adressen oder andere persönliche Kennungen und sendet keine Daten an einen Server. Alle Einstellungen oder Übungsinformationen werden lokal auf dem Gerät gespeichert.
+        \nBenutzer dürfen die App für persönliches Lernen, Unterhaltung oder Übungszwecke verwenden; die verfügbaren Simulations- und Übungsfunktionen nutzen; und bei Bedarf Feedback geben oder Probleme an den Entwickler melden. Es ist jedoch nicht gestattet, die App ohne Erlaubnis zu modifizieren, zu stören, zu kopieren, zu verteilen oder wiederzuverwenden; die App für illegale, schädliche oder störende Zwecke zu verwenden; Reverse Engineering durchzuführen, zu hacken oder Schutzmechanismen der App zu umgehen; oder die App auf eine Weise zu nutzen, die übermäßigen Lärm verursacht oder andere negativ beeinflusst.
+        \nDie Guitar-App enthält keine In-App-Käufe, erhebt keine Gebühren jeglicher Art, und alle Funktionen werden kostenlos bereitgestellt.
+        \nAlle Schnittstellen, Quellcodes, Unterrichtsinhalte, Gitarrentöne, Bilder und Symbole in der App gehören dem Entwickler. Benutzer dürfen diese nicht ohne Genehmigung kopieren, verwenden oder kommerziell verbreiten.
+        \nDer Entwickler übernimmt keine Verantwortung für Verletzungen von Hand, Handgelenk oder anderen Körperteilen aufgrund falscher Übungen; Schäden, die durch die Nutzung der App in unsicheren Umgebungen entstehen; Funktionsstörungen, Fehler oder Unterbrechungen der App; oder Datenverlust aufgrund von App-Löschung oder Geräteproblemen. Die App wird „wie besehen“ ohne jegliche Garantien bereitgestellt.
+        \nDer Entwickler kann die Nutzungsbedingungen jederzeit aktualisieren. Die fortgesetzte Nutzung der App nach einer Aktualisierung der Bedingungen gilt als Akzeptanz der überarbeiteten Bedingungen. Der Entwickler behält sich außerdem das Recht vor, den Benutzerzugang zu sperren oder zu beenden, falls Verstöße gegen die Bedingungen festgestellt werden.
+        \nBei Fragen, Bedenken oder Feedback kontaktieren Sie uns bitte per E-Mail: store@gambi.global.
+    </string>
+</resources>

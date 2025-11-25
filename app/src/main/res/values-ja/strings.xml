@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ギター</string>
+    <string name="menu_title">ギター学習</string>
+    <string name="menu_item_1">ギター</string>
+    <string name="menu_item_2">演奏を学ぶ</string>
+    <string name="menu_item_3">記録リスト</string>
+    <string name="language">言語</string>
+    <string name="english">英語</string>
+    <string name="mail">メール</string>
+    <string name="share_this_app">このアプリを共有</string>
+    <string name="feedback">フィードバック</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="general">一般</string>
+    <string name="settings">設定</string>
+    <string name="record_playlist">録音プレイリスト</string>
+    <string name="guitar_record">ギター録音</string>
+    <string name="tutorial">マイク録音</string>
+    <string name="rename">名前を変更</string>
+    <string name="delete">削除</string>
+    <string name="cancel">キャンセル</string>
+    <string name="save">保存</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">この項目を削除してもよろしいですか？</string>
+    <string name="coming_soon">近日公開！</string>
+    <string name="policy">ポリシー</string>
+    <string name="save_record">記録を保存</string>
+    <string name="do_you_want_to_save_this_record">この記録を保存しますか？</string>
+    <string name="cancel_successfully">キャンセルしました</string>
+    <string name="record_saved_successfully">記録が正常に保存されました</string>
+    <string name="choose_hand">利き手を選択</string>
+    <string name="metronome">メトロノーム</string>
+    <string name="tutorial_complete">チュートリアル完了</string>
+    <string name="rename_complete">名前の変更が完了しました</string>
+    <string name="delete_complete">削除が完了しました</string>
+
+    <string name="show_index">インデックスを表示</string>
+    <string name="loading">読み込み中...</string>
+    <string name="previous">前へ</string>
+    <string name="done">完了</string>
+    <string name="next">次へ</string>
+    <string name="click_on_a_recording_to_play_it">録音をクリックして再生します</string>
+    <string name="click_on_the_play_button_to_start_tutorial">再生ボタンをクリックしてチュートリアルを開始します</string>
+    <string name="click_on_options_icon_to_rename_or_delete_the_recording">
+        オプションアイコンをクリックして録音を名前変更または削除します
+    </string>
+    <string name="you_don_t_have_any_keys_record_files_yet">キーの録音ファイルはまだありません！</string>
+    <string name="open_guitar">ギターを開く</string>
+    <string name="no_browser_found">ブラウザが見つかりません</string>
+    <string name="press_on_green_area_to_play">緑の部分を押して再生</string>
+
+    <string name="terms_of_use">
+        Guitarアプリは、ユーザーがギターの練習や音のシミュレーションを行うために提供されています。本アプリは指の運動、コード練習、試奏などのツールを提供し、ユーザーがギターの技術を向上させることを目的としています。本アプリは娯楽および学習目的で提供されており、練習成果を保証するものではなく、専門家の指導に代わるものではありません。
+        \nGuitarアプリをインストールまたは使用することにより、ユーザーは本利用規約を読み、理解し、遵守することに同意したものとみなされます。本規約のいずれかの部分に同意できない場合は、ただちにアプリの使用を中止してください。
+        \nGuitarアプリはアカウント登録を必要とせず、個人情報を保存しません。すべての操作は完全に端末内で行われます。本アプリはデータを収集せず、ユーザーの行動を追跡せず、メールや個人情報を要求せず、サーバーにデータを送信しません。設定や練習情報は端末内にローカル保存されます。
+        \nユーザーは、個人的な学習、娯楽、練習目的でアプリを使用することができます。また、利用可能なシミュレーションおよび練習機能を使用したり、必要に応じて開発者にフィードバックや問題報告を行うことができます。ただし、ユーザーは許可なくアプリを改変、干渉、複製、配布、再利用することはできません。また、違法、有害、または迷惑な目的でアプリを使用すること、リバースエンジニアリングやハッキング、アプリ保護機能の回避、他者に迷惑や悪影響を及ぼす方法でアプリを使用することも禁止されています。
+        \nGuitarアプリにはアプリ内購入は含まれず、いかなる形の料金も発生せず、すべての機能は無料で提供されます。
+        \nアプリ内のインターフェース、ソースコード、レッスンコンテンツ、ギターサウンド、画像、アイコンはすべて開発者が所有しています。ユーザーは許可なくこれらを商業目的でコピー、使用、配布することはできません。
+        \n開発者は、誤った練習による手や手首、身体の怪我、危険な環境での使用による損害、アプリの不具合やエラー、中断、アプリ削除や端末の問題によるデータ損失について責任を負いません。本アプリは「現状のまま」提供され、いかなる保証もありません。
+        \n開発者は利用規約を随時更新する権利を有します。規約更新後にアプリを継続して使用することは、改定された規約に同意したものとみなされます。また、規約違反が検出された場合、開発者はユーザーのアクセスを一時停止または終了する権利を留保します。
+        \nご質問、ご不明点、またはフィードバックがある場合は、以下のメールアドレスまでご連絡ください：doviethavk@gmail.com
+    </string>
+</resources>

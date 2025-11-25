@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kitara</string>
+    <string name="menu_title">Kitaran oppiminen</string>
+    <string name="menu_item_1">Kitara</string>
+    <string name="menu_item_2">Opi soittamaan</string>
+    <string name="menu_item_3">Tallenteiden lista</string>
+    <string name="language">Kieli</string>
+    <string name="english">Englanti</string>
+    <string name="mail">Sähköposti</string>
+    <string name="share_this_app">Jaa tämä sovellus</string>
+    <string name="feedback">Palaute</string>
+    <string name="privacy_policy">Tietosuojakäytäntö</string>
+    <string name="general">Yleiset</string>
+    <string name="settings">Asetukset</string>
+    <string name="record_playlist">Tallennussoittolista</string>
+    <string name="guitar_record">Kitaran tallenne</string>
+    <string name="tutorial">Mikrofonin tallenne</string>
+    <string name="rename">Nimeä uudelleen</string>
+    <string name="delete">Poista</string>
+    <string name="cancel">Peruuta</string>
+    <string name="save">Tallenna</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">Haluatko varmasti poistaa tämän kohteen?</string>
+    <string name="coming_soon">Tulossa pian!</string>
+    <string name="policy">Käytännöt</string>
+    <string name="save_record">Tallenna tallenne</string>
+    <string name="do_you_want_to_save_this_record">Haluatko tallentaa tämän tallenteen?</string>
+    <string name="cancel_successfully">Peruutettu onnistuneesti</string>
+    <string name="record_saved_successfully">Tallenne tallennettu onnistuneesti</string>
+    <string name="choose_hand">Valitse käsi</string>
+    <string name="metronome">Metronomi</string>
+    <string name="tutorial_complete">Opas suoritettu</string>
+    <string name="rename_complete">Nimeäminen valmis</string>
+    <string name="delete_complete">Poisto valmis</string>
+
+    <string name="show_index">Näytä indeksi</string>
+    <string name="loading">Ladataan...</string>
+    <string name="previous">Edellinen</string>
+    <string name="done">Valmis</string>
+    <string name="next">Seuraava</string>
+    <string name="click_on_a_recording_to_play_it">Napsauta tallennetta toistaaksesi sen</string>
+    <string name="click_on_the_play_button_to_start_tutorial">Napsauta toistopainiketta aloittaaksesi oppaan</string>
+    <string name="click_on_options_icon_to_rename_or_delete_the_recording">
+        Napsauta asetuskuvaketta nimetäksesi tai poistaaksesi tallenteen
+    </string>
+    <string name="you_don_t_have_any_keys_record_files_yet">Sinulla ei ole vielä yhtään näppäintallennetta!</string>
+    <string name="open_guitar">Avaa kitara</string>
+    <string name="no_browser_found">Selainta ei löytynyt</string>
+    <string name="press_on_green_area_to_play">Paina vihreää aluetta soittaaksesi</string>
+
+
+    <string name="terms_of_use">
+        Guitar-sovellus on tarkoitettu auttamaan käyttäjiä harjoittelemaan ja simuloimaan kitaran ääniä. Se tarjoaa työkaluja sormiharjoituksiin, sointuharjoitteluun ja kokeilusoittoon, ja sen tavoitteena on auttaa käyttäjiä parantamaan kitarataitojaan. Sovellus on tarkoitettu viihde- ja oppimistarkoituksiin, eikä se takaa harjoittelun tuloksia eikä korvaa ammatillista ohjausta.
+        \nAsentamalla tai käyttämällä Guitar-sovellusta käyttäjät vahvistavat, että he ovat lukeneet, ymmärtäneet ja hyväksyneet noudattaa näitä käyttöehtoja. Jos et hyväksy mitään näistä ehdoista, lopeta sovelluksen käyttö välittömästi.
+        \nGuitar-sovellus ei vaadi tilin rekisteröintiä eikä tallenna henkilötietoja. Kaikki toiminnot tapahtuvat kokonaan laitteella. Sovellus ei kerää tietoja, seuraa käyttäjän toimintaa, vaadi sähköpostia tai muita henkilökohtaisia tunnisteita, eikä lähetä tietoja palvelimelle. Kaikki asetukset tai harjoittelutiedot tallennetaan paikallisesti laitteelle.
+        \nKäyttäjät voivat käyttää sovellusta henkilökohtaiseen oppimiseen, viihteeseen tai harjoitteluun; käyttää saatavilla olevia simulaatio- ja harjoitusominaisuuksia; ja antaa palautetta tai ilmoittaa ongelmista kehittäjälle tarvittaessa. Käyttäjien ei kuitenkaan sallita muokata, häiritä, kopioida, jakaa tai käyttää sovellusta ilman lupaa; käyttää sovellusta laittomiin, vahingollisiin tai häiritseviin tarkoituksiin; suorittaa käänteistä suunnittelua, hakkeroida tai kiertää sovelluksen suojausmekanismeja; tai käyttää sovellusta tavalla, joka aiheuttaa liiallista melua tai vaikuttaa negatiivisesti muihin.
+        \nGuitar-sovelluksessa ei ole sovelluksen sisäisiä ostoja, se ei veloita maksuja missään muodossa, ja kaikki ominaisuudet ovat ilmaisia.
+        \nKaikki sovelluksen käyttöliittymät, lähdekoodi, oppitasisisältö, kitaran äänet, kuvat ja kuvakkeet ovat kehittäjän omaisuutta. Käyttäjien ei ole sallittua kopioida, käyttää tai jakaa niitä kaupallisiin tarkoituksiin ilman lupaa.
+        \nKehittäjä ei ole vastuussa käsien, ranteiden tai fyysisten vammojen aiheutumisesta väärän harjoittelun seurauksena; vahingoista, jotka johtuvat sovelluksen käytöstä epäturvallisissa ympäristöissä; sovelluksen toimintahäiriöistä, virheistä tai keskeytyksistä; tai tietojen menetyksestä sovelluksen poistamisen tai laitteen ongelmien vuoksi. Sovellus tarjotaan “sellaisenaan” ilman minkäänlaisia takuita.
+        \nKehittäjä voi päivittää käyttöehdot milloin tahansa. Sovelluksen käyttö ehtojen päivittämisen jälkeen merkitsee hyväksyntää päivitettyihin ehtoihin. Kehittäjä pidättää myös oikeuden keskeyttää tai lopettaa käyttäjän pääsyn, jos havaitaan ehtojen rikkomuksia.
+        \nJos sinulla on kysyttävää, huolenaiheita tai palautetta, ota meihin yhteyttä sähköpostitse: doviethavk@gmail.com.
+    </string>
+</resources>
