@@ -5,7 +5,6 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,21 +25,18 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.guitar.ui.home.updateLocale
-import com.example.guitar.ui.onboarding.OnboardingScreen
-import com.example.guitar.ui.onboarding.UserPreferences
-import com.example.guitar.ui.policy.PolicyScreen
-import com.example.guitar.ui.recordplaylist.TutorialDialog
-import com.example.guitar.ui.theme.GuitarTheme
+import com.example.guitar.utils.Navigation
+import com.example.guitar.utils.SharedPreference
+import com.example.guitar.view.home.updateLocale
+import com.example.guitar.view.onboarding.OnboardingScreen
+import com.example.guitar.utils.UserPreferences
+import com.example.guitar.view.theme.GuitarTheme
 import kotlinx.coroutines.launch
-import java.security.Policy
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
@@ -98,8 +94,10 @@ class MainActivity : ComponentActivity() {
                                 paddingBottom = navigationBarHeight,
                                 localizedContext = localizedContext,
                                 getLocale = {
-                                    currentLocale = Locale.Builder().setLanguage(SharedPreference.getLanguage(context)?: "en").build()
-                                    language = SharedPreference.getLanguage(context)?: "en"
+                                    currentLocale = Locale.Builder()
+                                        .setLanguage(SharedPreference.getLanguage(context) ?: "en")
+                                        .build()
+                                    language = SharedPreference.getLanguage(context) ?: "en"
                                 },
                                 language = language,
                                 window = window
