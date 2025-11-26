@@ -4,5 +4,5 @@
         <item name="windowSplashScreenAnimatedIcon"> @drawable/img_logo </item>
         <item name="postSplashScreenTheme">@style/Theme.Guitar</item>
     </style>
-    <style name="Theme.Guitar" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Guitar" parent="android:Theme.Material.NoActionBar" />
 </resources>

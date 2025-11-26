@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MySplashScreen" >
+        android:theme="@style/Theme.Guitar" >
 
         <activity
             android:name=".MainActivity"
@@ -24,7 +24,7 @@
             android:windowSoftInputMode="adjustPan"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.MySplashScreen" >
+            android:theme="@style/Theme.Guitar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
