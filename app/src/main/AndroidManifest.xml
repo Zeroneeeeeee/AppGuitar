@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.guitarsimulator.guitar"
     xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -19,7 +20,7 @@
         android:theme="@style/Theme.Guitar" >
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.guitarsimulator.guitar.MainActivity"
             android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:windowSoftInputMode="adjustPan"
             android:exported="true"

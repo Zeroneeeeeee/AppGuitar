@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.guitar"
+    namespace = "com.guitarsimulator.guitar"
     compileSdk = 36
 
     defaultConfig {
