@@ -68,10 +68,11 @@ fun RecordingList(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painter = painterResource(R.drawable.img_empty),
-                    contentDescription = "Empty"
-
+                Icon(
+                    painter = painterResource(R.drawable.ic_empty),
+                    contentDescription = "Empty",
+                    tint = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.size(134.dp)
                 )
                 Text(
                     text = localizedContext.getString(R.string.you_don_t_have_any_keys_record_files_yet)

@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.view.Window
+import android.view.WindowManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -34,6 +36,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.guitar.R
 import java.util.Locale
 
@@ -56,11 +60,15 @@ fun HomeScreen(
     toSettingScreen: () -> Unit = {},
     toListRecordScreen: () ->Unit = {},
     toLearnToPlayScreen: () -> Unit = {},
+    window: Window,
     localizedContext: Context
 ) {
     val context = LocalContext.current
     val activity = context as? Activity
+    val windowInsertController = WindowCompat.getInsetsController(window, window.decorView)
+
     LaunchedEffect(Unit) {
+        windowInsertController.show(WindowInsetsCompat.Type.systemBars())
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
     Column(
@@ -81,7 +89,6 @@ fun HomeScreen(
             onLearnToPlayClick = toLearnToPlayScreen
         )
     }
-
 }
 
 @Composable

@@ -1,19 +1,27 @@
 package com.example.guitar.utils
 
+import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.util.Log
 import android.view.Window
+import android.view.WindowInsets
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
@@ -26,7 +34,6 @@ import com.example.guitar.view.setting.LanguageScreen
 import com.example.guitar.view.setting.SettingScreen
 import com.example.guitar.view.setting.languages
 
-@RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
 @Composable
 fun Navigation(
     modifier: Modifier = Modifier,
@@ -38,6 +45,8 @@ fun Navigation(
     language: String
 ) {
     val backStack = remember { mutableStateListOf<Screen>(Screen.Home) }
+    val windowInsertController = WindowCompat.getInsetsController(window, window.decorView)
+
     NavDisplay(
         modifier = modifier,
         backStack = backStack,
@@ -46,12 +55,18 @@ fun Navigation(
             entry<Screen.Home> {
                 HomeScreen(
                     toGuitarScreen = {
+                        windowInsertController.hide(WindowInsetsCompat.Type.systemBars())
+                        windowInsertController.systemBarsBehavior =
+                            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
                         backStack.add(Screen.Guitar())
                     },
                     toSettingScreen = {
                         backStack.add(Screen.Setting)
                     },
                     toListRecordScreen = {
+                        windowInsertController.hide(WindowInsetsCompat.Type.systemBars())
+                        windowInsertController.systemBarsBehavior =
+                            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
                         backStack.add(
                             Screen.Playlist(
                                 selectedTab = localizedContext.resources.getString(
@@ -61,6 +76,9 @@ fun Navigation(
                         )
                     },
                     toLearnToPlayScreen = {
+                        windowInsertController.hide(WindowInsetsCompat.Type.systemBars())
+                        windowInsertController.systemBarsBehavior =
+                            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
                         backStack.add(
                             Screen.Playlist(
                                 selectedTab = localizedContext.resources.getString(
@@ -70,6 +88,7 @@ fun Navigation(
                         )
                     },
                     localizedContext = localizedContext,
+                    window = window,
                     modifier = Modifier.padding(top = paddingTop, bottom = paddingBottom)
                 )
             }
@@ -77,6 +96,7 @@ fun Navigation(
                 PlayingGuitarScreen(
                     onBack = {
                         backStack.removeLastOrNull()
+                        windowInsertController.show(WindowInsetsCompat.Type.systemBars())
                     },
 //                    toTunerClick = {
 //                        backStack.add(Screen.Tuner)
@@ -108,8 +128,9 @@ fun Navigation(
                         backStack.add(Screen.Policy)
                     },
                     modifier = Modifier
-                        .background(Color(0xFFF9F9F9))
-                        .padding(top = paddingTop, bottom = paddingBottom),
+                        .background(MaterialTheme.colorScheme.background)
+                        .padding(top = paddingTop, bottom = paddingBottom)
+                    ,
                     localizedContext = localizedContext,
                     language = languages.find { it.id == language }!!.language
                 )
@@ -120,8 +141,9 @@ fun Navigation(
                         backStack.removeLastOrNull()
                     },
                     modifier = Modifier
-                        .background(Color(0xFFF9F9F9))
-                        .padding(top = paddingTop, bottom = paddingBottom),
+                        .background(MaterialTheme.colorScheme.background)
+                        .padding(top = paddingTop, bottom = paddingBottom)
+                            ,
                     localizedContext = localizedContext,
                     getLocale = getLocale,
                     language = language
@@ -133,13 +155,13 @@ fun Navigation(
             entry<Screen.Playlist> { (selectedTab, isTabVisible) ->
                 RecordPlaylistScreen(
                     onBack = {
+                        //windowInsertController.show(WindowInsetsCompat.Type.systemBars())
                         backStack.removeLastOrNull()
                     },
                     toTutorial = {
                         if(isTabVisible) {
                             backStack.removeLastOrNull()
                         }
-                            Log.d("TAG", "${backStack[backStack.lastIndex]}")
                         backStack[backStack.lastIndex] = Screen.Guitar(listNote = it, isTutorial = true)
                         Toast.makeText(
                             localizedContext,

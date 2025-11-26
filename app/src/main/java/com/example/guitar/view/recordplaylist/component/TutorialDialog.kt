@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -73,7 +74,7 @@ fun Content(modifier: Modifier = Modifier, onDismiss: () -> Unit = {}, localized
     Column(
         modifier = modifier
             .width(300.dp)
-            .background(Color.White, RoundedCornerShape(10.dp))
+            .background(MaterialTheme.colorScheme.background, RoundedCornerShape(10.dp))
             .padding(16.dp)
     ) {
         Showcase(modifier = Modifier.fillMaxWidth(), tutorial = recordings[index])
@@ -126,7 +127,6 @@ fun Showcase(
         Image(
             painter = painterResource(tutorial.image),
             contentDescription = "Recordings",
-            contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier.height(16.dp))

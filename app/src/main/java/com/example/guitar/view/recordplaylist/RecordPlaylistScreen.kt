@@ -52,10 +52,6 @@ fun RecordPlaylistScreen(
     val context = LocalContext.current
     val activity = context as? Activity
 
-    val windowInsertController = WindowCompat.getInsetsController(window, window.decorView)
-    windowInsertController.hide(WindowInsetsCompat.Type.systemBars())
-    windowInsertController.systemBarsBehavior =
-        WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
     LaunchedEffect(Unit) {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -69,7 +65,6 @@ fun RecordPlaylistScreen(
             PlaylistHeader(
                 isGuideline = true,
                 onBackClick = {
-                    windowInsertController.show(WindowInsetsCompat.Type.systemBars())
                     viewModel.stopPlayback()
                     onBack()
                 },

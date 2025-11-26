@@ -6,17 +6,12 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.util.Log
 import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -37,12 +32,8 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -51,14 +42,10 @@ import com.example.guitar.R
 import com.example.guitar.utils.Metronome
 import com.example.guitar.dtmodels.NoteEventVM
 import com.example.guitar.utils.baseNoteToString
-import com.example.guitar.view.recordplaylist.component.Keyboard
-import com.example.guitar.view.recordplaylist.component.TextFieldAboveKeyboard
-import com.example.guitar.view.recordplaylist.component.keyboardAsState
 import com.example.guitar.viewmodel.GuitarViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
-import kotlin.math.roundToInt
 
 @Composable
 fun PlayingGuitarScreen(
@@ -75,11 +62,6 @@ fun PlayingGuitarScreen(
     val activity = context as? Activity
     var isMetronomeOn by remember { mutableStateOf(false) }
     val metronome = remember { Metronome(context) }
-
-    val windowInsertController = WindowCompat.getInsetsController(window, window.decorView)
-    windowInsertController.hide(WindowInsetsCompat.Type.systemBars())
-    windowInsertController.systemBarsBehavior =
-        WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
     LaunchedEffect(Unit) {
         Log.d("LaunchedEffect", "PlayingGuitarScreen")
@@ -100,7 +82,6 @@ fun PlayingGuitarScreen(
         GuitarFingerBoard(
             listNotes = listNotes,
             onBack = {
-                windowInsertController.show(WindowInsetsCompat.Type.systemBars())
                 isMetronomeOn = false
                 onBack()
             },
@@ -321,7 +302,6 @@ fun GuitarFingerBoard(
                                 .onGloballyPositioned { layoutCoordinates ->
                                     imageHeightPx = layoutCoordinates.size.height.toFloat()
                                     imageWidthPx = layoutCoordinates.size.width.toFloat()
-                                    Log.d("Loaded", "Loaded")
                                 }
                         )
 
@@ -501,7 +481,6 @@ fun GuitarHorizontalGrid(
                 context,
                 localizeContext.getString(R.string.tutorial_complete), Toast.LENGTH_SHORT
             ).show()
-            delay(2000)
         }
     }
 
@@ -768,325 +747,6 @@ fun GuitarHorizontalGrid(
                 }
             }
         }
-    }
-}
-
-@Composable
-fun GuitarString(modifier: Modifier = Modifier, string: Int = -1, trigger: Long = 0L) {
-    val triggers = remember { mutableStateListOf(0, 0, 0, 0, 0, 0) }
-
-    LaunchedEffect(trigger) {
-        if (string in 0..5) {
-            triggers[string]++
-        }
-    }
-
-    Column(modifier = modifier) {
-        for (i in 0..5) {
-            Spacer(Modifier.weight(0.5f))
-            VibrationString(
-                trigger = triggers[i],
-                stringImg = if (i in 0..3) R.drawable.ic_bass_string else R.drawable.ic_main_string
-            )
-            Spacer(Modifier.weight(0.5f))
-        }
-    }
-}
-
-@Composable
-fun VibrationString(modifier: Modifier = Modifier, trigger: Int = 0, stringImg: Int) {
-    val pxToMove = with(LocalDensity.current) { 3.dp.toPx() }
-    val offsetY = remember { Animatable(0f) }
-
-    LaunchedEffect(trigger) {
-        if (trigger > 0) {
-            var ampli = pxToMove
-            repeat(35) {
-                offsetY.animateTo(ampli, animationSpec = tween(1))
-                offsetY.animateTo(-ampli, animationSpec = tween(1))
-                ampli *= 0.9f
-            }
-            offsetY.animateTo(0f, animationSpec = tween(1))
-        }
-    }
-
-    Image(
-        painter = painterResource(stringImg),
-        contentDescription = "String",
-        contentScale = ContentScale.FillWidth,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(2.dp)
-            .offset { IntOffset(0, offsetY.value.roundToInt()) }
-            .background(color = Color.Yellow)
-    )
-}
-
-@Composable
-fun CustomGridScrollBar(
-    scrollState: ScrollState,
-    itemWidth: Dp,
-    totalItems: Int,
-    modifier: Modifier = Modifier,
-) {
-    val density = LocalDensity.current
-    val itemWidthPx = with(density) { itemWidth.toPx() }
-
-    var barWidth by remember { mutableFloatStateOf(1f) }
-    var isDragging by remember { mutableStateOf(false) }
-    var dragFraction by remember { mutableFloatStateOf(0f) }
-
-    val thumbFraction by remember {
-        derivedStateOf {
-            val totalWidthPx = totalItems * itemWidthPx
-            (barWidth / totalWidthPx).coerceIn(0f, 1f)
-        }
-    }
-
-    val scrollFraction by remember {
-        derivedStateOf {
-            if (scrollState.maxValue == 0) 0f
-            else scrollState.value.toFloat() / scrollState.maxValue.toFloat()
-        }
-    }
-
-    LaunchedEffect(scrollFraction) {
-        Log.d("ScrollFraction", "ScrollFraction: $scrollFraction")
-    }
-
-    Box(
-        modifier = modifier
-            .background(Color.LightGray.copy(alpha = 0.3f), RoundedCornerShape(4.dp))
-            .onSizeChanged { barWidth = it.width.toFloat() }
-            .drawBehind {
-                val strokeWidth = 2.dp.toPx()
-                for (i in 1..21) {
-                    val x = size.width / 22 * i
-                    drawLine(
-                        color = Color(0xFFAAAAAA),
-                        start = Offset(x, 0f),
-                        end = Offset(x, size.height),
-                        strokeWidth = strokeWidth
-                    )
-                }
-            }
-            .pointerInput(Unit) {
-                detectDragGestures(
-                    onDragStart = { isDragging = true },
-                    onDragEnd = { isDragging = false },
-                    onDragCancel = { isDragging = false },
-                    onDrag = { change, dragAmount ->
-                        change.consume()
-                        val scrollableWidth = barWidth * (1f - thumbFraction)
-                        Log.d("ThumbFraction", "ThumbFraction: $thumbFraction")
-                        if (scrollableWidth > 0) {
-                            val fractionDelta = dragAmount.x / scrollableWidth
-                            dragFraction = (dragFraction + fractionDelta).coerceIn(0f, 1f)
-                        }
-                    }
-                )
-            }
-    ) {
-        val displayFraction = if (isDragging) dragFraction else scrollFraction
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(thumbFraction)
-                .graphicsLayer {
-                    translationX = displayFraction * (barWidth - barWidth * thumbFraction)
-                }
-            //.border(1.dp,Color.Black)
-            ,
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_pitch),
-                contentDescription = "Pitch",
-                tint = Color.Unspecified,
-                modifier = Modifier.fillMaxHeight(),
-            )
-        }
-    }
-
-    LaunchedEffect(dragFraction, isDragging) {
-        if (isDragging) {
-            scrollState.scrollTo((dragFraction * scrollState.maxValue).toInt())
-        }
-    }
-}
-
-val chords = listOf("G", "Em", "Am", "F", "C")
-
-@Composable
-fun ChordPicker(modifier: Modifier = Modifier, onChordSelected: (String) -> Unit = {}) {
-    var selectedChord by remember { mutableIntStateOf(-1) }
-    Column(
-        modifier = modifier
-            .fillMaxHeight()
-            .padding(horizontal = 16.dp)
-    ) {
-        Spacer(modifier = Modifier.weight(1f))
-        chords.forEach { chord ->
-            ChordPickerItem(
-                name = chord,
-                selected = selectedChord == chords.indexOf(chord),
-                onClick = {
-                    selectedChord = if (selectedChord == chords.indexOf(chord)) -1
-                    else chords.indexOf(chord)
-                    if (selectedChord != -1) onChordSelected(chord) else onChordSelected("")
-                }
-            )
-            Spacer(modifier = Modifier.weight(1f))
-        }
-    }
-}
-
-@Composable
-fun ChordPickerItem(
-    modifier: Modifier = Modifier,
-    name: String = "A",
-    selected: Boolean = false,
-    onClick: () -> Unit = {}
-) {
-    Box(
-        modifier = modifier
-            .border(width = 1.dp, color = Color.Black, shape = CircleShape)
-            .clip(CircleShape)
-            .background(if (selected) Color(0xFFFFBF51) else Color.White)
-            .size(40.dp)
-            .clickable(onClick = { onClick() }),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = name, color = Color.Black)
-    }
-}
-
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-fun SaveDialog(
-    modifier: Modifier = Modifier,
-    window: Window,
-    localizedContext: Context,
-    onCancel: () -> Unit = {},
-    onSave: (String) -> Unit = {}
-) {
-    val isImeVisible by keyboardAsState()
-    var name by remember { mutableStateOf("") }
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.5f))
-            .clickable { }
-    ) {
-        Column(
-            modifier = modifier
-                .width(300.dp)
-                .clickable(
-                    indication = null,
-                    interactionSource = remember { MutableInteractionSource() },
-                    onClick = {}
-                )
-                .border(4.dp, Color.Black, RoundedCornerShape(15.dp))
-                .padding(8.dp)
-                .background(Color(0xFFFFBF51), RoundedCornerShape(15.dp))
-                .drawBehind {
-                    val strokeWidth = 8.dp.toPx()
-
-                    drawLine(
-                        color = Color(0xFFF8D69B),
-                        start = Offset(0f, 0f),
-                        end = Offset(size.width, 0f),
-                        strokeWidth = strokeWidth
-                    )
-
-                    drawLine(
-                        color = Color(0xFFF8D69B),
-                        start = Offset(0f, 0f),
-                        end = Offset(0f, size.height),
-                        strokeWidth = strokeWidth
-                    )
-
-                    drawLine(
-                        color = Color(0xFFDB6E0E),
-                        start = Offset(size.width, -8f),
-                        end = Offset(size.width, size.height + 8f),
-                        strokeWidth = strokeWidth
-                    )
-
-                    drawLine(
-                        color = Color(0xFFDB6E0E),
-                        start = Offset(-8f, size.height),
-                        end = Offset(size.width, size.height),
-                        strokeWidth = strokeWidth
-                    )
-                }
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = localizedContext.getString(R.string.save_record),
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = localizedContext.getString(R.string.do_you_want_to_save_this_record),
-                color = Color.Black
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(
-                value = name,
-                onValueChange = { name = it },
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color(0xffF8D69B),
-                    unfocusedContainerColor = Color(0xffF8D69B),
-                    focusedIndicatorColor = Color(0xFFDB6E0E),
-                    unfocusedIndicatorColor = Color(0xFFDB6E0E),
-                    focusedTextColor = Color.Black,
-                    unfocusedTextColor = Color.Black
-                ),
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done
-                ),
-
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Button(
-                    onClick = { onCancel() },
-                    colors = ButtonDefaults.buttonColors(Color(0xFFDB6E0E)),
-                ) {
-                    Text(text = localizedContext.getString(R.string.cancel), color = Color.White)
-                }
-
-                Button(
-                    onClick = { onSave(name) },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFDB6E0E),
-                        disabledContentColor = Color.Gray,
-                        contentColor = Color.White
-                    ),
-                    enabled = name.isNotEmpty()
-                ) {
-                    Text(text = localizedContext.getString(R.string.save))
-                }
-            }
-        }
-    }
-    if (isImeVisible == Keyboard.Opened) {
-        val windowInsertController = WindowCompat.getInsetsController(window, window.decorView)
-        windowInsertController.hide(WindowInsetsCompat.Type.systemBars())
-        windowInsertController.systemBarsBehavior =
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        TextFieldAboveKeyboard(name = name, onValueChange = { name = it })
     }
 }
 

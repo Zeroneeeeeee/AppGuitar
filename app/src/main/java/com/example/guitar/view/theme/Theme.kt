@@ -59,8 +59,8 @@ fun GuitarTheme(
 
     SideEffect {
         systemUiController.setStatusBarColor(
-            color = if(darkTheme) Color(red = 20, green = 18, blue = 24) else Color(red = 254, green = 247, blue = 255),
-            darkIcons = true // icon đen hoặc trắng tùy nền
+            color = colorScheme.background,
+            darkIcons = !darkTheme // icon đen hoặc trắng tùy nền
         )
     }
 
