@@ -1,4 +1,4 @@
-package com.guitarsimulator.guitar.view.playingguitar
+package com.guitarsimulator.guitar.view.playingguitar.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

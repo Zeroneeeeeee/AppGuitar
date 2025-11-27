@@ -47,6 +47,7 @@
     <string name="open_guitar">Avaa kitara</string>
     <string name="no_browser_found">Selainta ei löytynyt</string>
     <string name="press_on_green_area_to_play">Paina vihreää aluetta soittaaksesi</string>
+    <string name="no_notes_detected_during_recording">No notes detected during recording</string>
 
 
     <string name="terms_of_use">

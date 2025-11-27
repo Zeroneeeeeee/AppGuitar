@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.datastore.preferences.preferencesDataStore
-import com.guitarsimulator.guitar.utils.Navigation
 import com.guitarsimulator.guitar.utils.SharedPreference
 import com.guitarsimulator.guitar.utils.UserPreferences
 import com.guitarsimulator.guitar.view.home.updateLocale

@@ -47,6 +47,7 @@
     <string name="open_guitar">Abrir guitarra</string>
     <string name="no_browser_found">No se encontró ningún navegador</string>
     <string name="press_on_green_area_to_play">Presiona el área verde para reproducir</string>
+    <string name="no_notes_detected_during_recording">No notes detected during recording</string>
 
 
     <string name="terms_of_use">

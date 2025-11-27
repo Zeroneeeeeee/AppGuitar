@@ -1,4 +1,4 @@
-package com.guitarsimulator.guitar.view.playingguitar
+package com.guitarsimulator.guitar.view.playingguitar.component
 
 import android.util.Log
 import androidx.compose.foundation.ScrollState

@@ -1,4 +1,4 @@
-package com.guitarsimulator.guitar.view.playingguitar
+package com.guitarsimulator.guitar.view.playingguitar.component
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween

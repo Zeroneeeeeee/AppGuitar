@@ -1,4 +1,4 @@
-package com.guitarsimulator.guitar.view.playingguitar
+package com.guitarsimulator.guitar.view.playingguitar.component
 
 import android.content.Context
 import android.view.Window

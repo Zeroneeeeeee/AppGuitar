@@ -80,8 +80,8 @@ fun RecordingList(
                 Button(
                     onClick = onOpenGuitarClick,
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Black,
-                        contentColor = Color.White,
+                        containerColor = MaterialTheme.colorScheme.onBackground,
+                        contentColor = MaterialTheme.colorScheme.background,
                     )
                 ) {
                     Text(text = localizedContext.getString(R.string.open_guitar))

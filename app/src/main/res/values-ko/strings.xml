@@ -47,6 +47,7 @@
     <string name="open_guitar">기타 열기</string>
     <string name="no_browser_found">브라우저를 찾을 수 없음</string>
     <string name="press_on_green_area_to_play">녹색 영역을 눌러 재생</string>
+    <string name="no_notes_detected_during_recording">No notes detected during recording</string>
 
     <string name="terms_of_use">
         Guitarアプリは、ユーザーがギターの練習や音のシミュレーションを行うために提供されています。本アプリは指の運動、コード練習、試奏などのツールを提供し、ユーザーがギターの技術を向上させることを目的としています。本アプリは娯楽および学習目的で提供されており、練習成果を保証するものではなく、専門家の指導に代わるものではありません。

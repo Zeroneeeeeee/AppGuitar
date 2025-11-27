@@ -1,4 +1,4 @@
-package com.guitarsimulator.guitar.utils
+package com.guitarsimulator.guitar
 
 import android.content.Context
 import android.view.Window
@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import com.guitarsimulator.guitar.R
+import com.guitarsimulator.guitar.utils.Screen
 import com.guitarsimulator.guitar.view.home.HomeScreen
 import com.guitarsimulator.guitar.view.playingguitar.PlayingGuitarScreen
 import com.guitarsimulator.guitar.view.policy.PolicyScreen
@@ -147,7 +147,6 @@ fun Navigation(
             entry<Screen.Playlist> { (selectedTab, isTabVisible) ->
                 RecordPlaylistScreen(
                     onBack = {
-                        //windowInsertController.show(WindowInsetsCompat.Type.systemBars())
                         backStack.removeLastOrNull()
                     },
                     toTutorial = {

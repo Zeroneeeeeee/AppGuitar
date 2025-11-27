@@ -47,6 +47,7 @@
     <string name="open_guitar">Ouvrir la guitare</string>
     <string name="no_browser_found">Aucun navigateur trouvé</string>
     <string name="press_on_green_area_to_play">Appuyez sur la zone verte pour jouer</string>
+    <string name="no_notes_detected_during_recording">No notes detected during recording</string>
 
     <string name="terms_of_use">
         L\'application Guitar est fournie pour aider les utilisateurs à pratiquer et à simuler les sons de guitare. Elle propose des outils pour les exercices de doigts, la pratique des accords et le jeu d’essai, et vise à aider les utilisateurs à améliorer leurs compétences en guitare. L\'application est destinée à des fins de divertissement et d\'apprentissage et ne garantit pas les résultats de la pratique, ni ne remplace un accompagnement professionnel.

@@ -12,12 +12,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.guitarsimulator.guitar.R
 import kotlinx.coroutines.launch
@@ -62,7 +64,11 @@ fun OnboardingScreen(
                 Text("Skip")
             }
 
-            Button(onClick = {
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xffFFBF51)
+                ),
+                onClick = {
                 if (pagerState.currentPage == onboardingPages.lastIndex) {
                     onFinished()
                 } else {

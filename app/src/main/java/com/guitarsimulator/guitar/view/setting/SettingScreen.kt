@@ -172,7 +172,12 @@ fun GeneralChoices(
                         }
 
                         localizedContext.resources.getString(R.string.feedback) -> {
-                            // Handle feedback selection
+                            context.startActivity(
+                                Intent(
+                                    Intent.ACTION_VIEW,
+                                    "https://play.google.com/store/apps/details?id=com.guitarsimulator.guitar".toUri()
+                                )
+                            )
                         }
 
                         localizedContext.resources.getString(R.string.privacy_policy) -> {

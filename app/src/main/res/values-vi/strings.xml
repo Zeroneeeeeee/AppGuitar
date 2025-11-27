@@ -47,6 +47,7 @@
     <string name="open_guitar">Chơi guitar</string>
     <string name="no_browser_found">Không tìm thấy trình duyệt</string>
     <string name="press_on_green_area_to_play">Nhấn theo vùng màu xanh</string>
+    <string name="no_notes_detected_during_recording">Bạn chưa chơi nốt nào</string>
 
     <string name="terms_of_use">
         Ứng dụng Guitar được cung cấp nhằm hỗ trợ người dùng luyện tập và mô phỏng tiếng đàn guitar, cung cấp các công cụ luyện ngón, bấm hợp âm hoặc chơi thử, cũng như giúp người dùng nâng cao kỹ năng chơi đàn. Ứng dụng mang tính chất giải trí và học tập, không đảm bảo kết quả luyện tập và không thay thế cho hướng dẫn chuyên nghiệp.

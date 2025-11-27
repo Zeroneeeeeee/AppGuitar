@@ -48,7 +48,7 @@ class GuitarViewModel(application: Application) : AndroidViewModel(application) 
 
     fun fetchRecordings() {
         viewModelScope.launch {
-            _recordings.value = emptyList()
+            //_recordings.value = emptyList()
             _recordings.value = recordingRepo.getAllRecordings().map { recording ->
                 recording.toRecordingVM(
                     sequence = noteEventRepo.getNoteEventByRecordId(recording.id)
@@ -56,7 +56,6 @@ class GuitarViewModel(application: Application) : AndroidViewModel(application) 
             }
             Log.d("GuitarViewModel", "Recordings: ${_recordings.value}")
         }
-        //_recordings.value = DemoMusic.demoRecordings
     }
 
     fun initialize(context: Context) {
@@ -71,8 +70,7 @@ class GuitarViewModel(application: Application) : AndroidViewModel(application) 
             soundManager.playHandSlap()
         }
     }
-
-    // --- Logic Ghi Âm ---
+    
     fun startRecording() {
         if (_isPlaying.value) return
         recordedSequence.clear()
