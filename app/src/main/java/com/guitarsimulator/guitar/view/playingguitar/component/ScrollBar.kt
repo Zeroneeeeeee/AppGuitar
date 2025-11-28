@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
@@ -70,11 +71,44 @@ fun CustomGridScrollBar(
             .drawBehind {
                 val strokeWidth = 2.dp.toPx()
                 for (i in 1..21) {
-                    val x = size.width / 22 * i
+                    val x = size.width / 22
+                    when (i) {
+                        3, 5, 7, 9, 15, 17, 19, 21 -> {
+                            drawCircle(
+                                color = Color.White,
+                                radius = 1.dp.toPx(),
+                                center = Offset(
+                                    x = x * (i - 0.5f),
+                                    y = size.height / 2  // giữa theo chiều dọc
+                                ),
+                                style = Stroke(width = 2.dp.toPx())
+                            )
+                        }
+                        12 ->{
+                            drawCircle(
+                                color = Color.White,
+                                radius = 1.dp.toPx(),
+                                center = Offset(
+                                    x = x * (i - 0.5f),
+                                    y = size.height / 3  // giữa theo chiều dọc
+                                ),
+                                style = Stroke(width = 2.dp.toPx())
+                            )
+                            drawCircle(
+                                color = Color.White,
+                                radius = 1.dp.toPx(),
+                                center = Offset(
+                                    x = x * (i - 0.5f),
+                                    y = 2* size.height / 3  // giữa theo chiều dọc
+                                ),
+                                style = Stroke(width = 2.dp.toPx())
+                            )
+                        }
+                    }
                     drawLine(
                         color = Color(0xFFAAAAAA),
-                        start = Offset(x, 0f),
-                        end = Offset(x, size.height),
+                        start = Offset(x * i, 0f),
+                        end = Offset(x * i, size.height),
                         strokeWidth = strokeWidth
                     )
                 }

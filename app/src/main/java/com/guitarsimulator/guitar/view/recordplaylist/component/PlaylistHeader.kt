@@ -24,6 +24,7 @@ fun PlaylistHeader(
     isGuideline: Boolean = false,
     onExposeTutorial: () -> Unit
 ) {
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -34,7 +35,9 @@ fun PlaylistHeader(
             contentDescription = "Back",
             modifier = Modifier
                 .size(32.dp)
-                .clickable(onClick = onBackClick)
+                .clickable(onClick = {
+                    onBackClick()
+                })
         )
         Text(
             text = title,
@@ -42,11 +45,14 @@ fun PlaylistHeader(
             fontWeight = FontWeight.Bold,
             modifier = Modifier.align(Alignment.Center)
         )
-        if(isGuideline){
+        if (isGuideline) {
             Icon(
                 painter = painterResource(R.drawable.ic_guideline),
                 contentDescription = "Guideline",
-                modifier = Modifier.size(24.dp).align(Alignment.CenterEnd).clickable(onClick = onExposeTutorial)
+                modifier = Modifier
+                    .size(24.dp)
+                    .align(Alignment.CenterEnd)
+                    .clickable(onClick = onExposeTutorial)
             )
         }
     }

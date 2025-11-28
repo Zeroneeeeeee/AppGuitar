@@ -3,6 +3,7 @@ package com.guitarsimulator.guitar.view.recordplaylist
 import android.app.Activity
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.util.Log
 import android.view.Window
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
@@ -26,7 +27,9 @@ import com.guitarsimulator.guitar.view.recordplaylist.component.Content
 import com.guitarsimulator.guitar.view.recordplaylist.component.DeleteDialog
 import com.guitarsimulator.guitar.view.recordplaylist.component.PlaylistHeader
 import com.guitarsimulator.guitar.view.recordplaylist.component.RenameDialog
+import com.guitarsimulator.guitar.view.recordplaylist.component.Tutorial
 import com.guitarsimulator.guitar.view.recordplaylist.component.TutorialDialog
+import kotlinx.coroutines.delay
 
 @Composable
 fun RecordPlaylistScreen(
@@ -49,6 +52,37 @@ fun RecordPlaylistScreen(
     val context = LocalContext.current
     val activity = context as? Activity
 
+    var isBackClicked by remember{mutableStateOf(true)}
+    LaunchedEffect(isBackClicked) {
+        if (!isBackClicked) {
+            delay(2000)
+            isBackClicked = true
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        Log.d("RecordPlaylistScreen",selectedTab)
+    }
+
+    val recordingTutorials = listOf(
+        Tutorial(
+            R.drawable.img_recordings_tutor_1,
+            localizedContext.getString(R.string.click_on_a_recording_to_play_it)
+        ),
+        Tutorial(
+            R.drawable.img_recordings_tutor_3,
+            localizedContext.getString(R.string.click_on_options_icon_to_rename_or_delete_the_recording)
+        ),
+    )
+    val learningTutorials = listOf(
+        Tutorial(
+            R.drawable.img_recordings_tutor_1,
+            localizedContext.getString(R.string.click_on_a_recording_to_play_it)
+        ),
+        Tutorial(R.drawable.img_recordings_tutor_2,
+            localizedContext.getString(R.string.click_on_the_play_button_to_start_tutorial)
+        ),
+    )
 
     LaunchedEffect(Unit) {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -62,8 +96,11 @@ fun RecordPlaylistScreen(
             PlaylistHeader(
                 isGuideline = true,
                 onBackClick = {
-                    viewModel.stopPlayback()
-                    onBack()
+                    if(isBackClicked){
+                        isBackClicked = false
+                        viewModel.stopPlayback()
+                        onBack()
+                    }
                 },
                 onExposeTutorial = { exposeGuideline = true },
                 title = if (isTabVisible) localizedContext.resources.getString(R.string.record_playlist) else selectedTab
@@ -126,7 +163,8 @@ fun RecordPlaylistScreen(
         if (exposeGuideline) {
             TutorialDialog(
                 onDismiss = { exposeGuideline = false },
-                localizedContext = localizedContext
+                localizedContext = localizedContext,
+                tutorials = if(selectedTab == localizedContext.resources.getString(R.string.guitar_record)) recordingTutorials else learningTutorials
             )
         }
     }

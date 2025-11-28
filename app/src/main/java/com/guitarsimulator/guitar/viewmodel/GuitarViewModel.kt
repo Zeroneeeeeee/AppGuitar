@@ -186,7 +186,7 @@ class GuitarViewModel(application: Application) : AndroidViewModel(application) 
 
     fun exportRecording(recording: RecordingVM) {
         viewModelScope.launch(Dispatchers.IO) {
-            renderToWavBuffer(recording)
+            //renderToWavBuffer(recording)
             Log.i("AudioExport", "Quá trình kết xuất cho ${recording.name} hoàn tất.")
         }
     }

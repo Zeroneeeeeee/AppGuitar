@@ -4,17 +4,24 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -62,14 +69,31 @@ fun VibrationString(modifier: Modifier = Modifier, trigger: Int = 0, stringImg: 
         }
     }
 
-    Image(
-        painter = painterResource(stringImg),
-        contentDescription = "String",
-        contentScale = ContentScale.FillWidth,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(2.dp)
-            .offset { IntOffset(0, offsetY.value.roundToInt()) }
-            .background(color = Color.Yellow)
-    )
+    Column(modifier = modifier
+    ){
+        Image(
+            painter = painterResource(stringImg),
+            contentDescription = "String",
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier
+                .fillMaxWidth()
+//            .height(2.dp)
+                .offset { IntOffset(0, offsetY.value.roundToInt()) }
+        )
+        Spacer(Modifier.height(2.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(2.dp)
+                .offset { IntOffset(0, offsetY.value.roundToInt()) }
+                .drawBehind {
+                    drawLine(
+                        color = Color.Black.copy(alpha = 0.4f),
+                        start = Offset(0f, 0f),
+                        end = Offset(size.width, 0f),
+                        strokeWidth = size.height
+                    )
+                }
+        )
+    }
 }

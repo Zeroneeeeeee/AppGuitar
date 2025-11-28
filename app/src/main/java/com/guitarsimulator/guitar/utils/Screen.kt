@@ -10,4 +10,6 @@ sealed interface Screen {
     //data object Tuner : Screen
     data class Playlist(var selectedTab:String = "", var isTabVisible:Boolean = true) : Screen
     data object Policy : Screen
+    data object Onboarding : Screen
+    data object Loading: Screen
 }

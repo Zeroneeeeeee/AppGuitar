@@ -1,12 +1,10 @@
 package com.guitarsimulator.guitar
 
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.RequiresApi
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -27,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -39,9 +38,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
-import androidx.datastore.preferences.preferencesDataStore
 import com.guitarsimulator.guitar.utils.SharedPreference
 import com.guitarsimulator.guitar.utils.UserPreferences
+import com.guitarsimulator.guitar.utils.dataStore
 import com.guitarsimulator.guitar.view.home.updateLocale
 import com.guitarsimulator.guitar.view.onboarding.OnboardingScreen
 import com.guitarsimulator.guitar.view.theme.GuitarTheme
@@ -50,15 +49,12 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
-    val Context.dataStore by preferencesDataStore(name = "user_prefs")
-    private lateinit var userPrefs: UserPreferences
-
-    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         installSplashScreen()
-        userPrefs = UserPreferences(dataStore)
+
+        val userPrefs = UserPreferences(this.dataStore)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
@@ -92,7 +88,7 @@ class MainActivity : ComponentActivity() {
                         isLoading = true
                     }
 
-                    when{
+                    when {
                         onboardingDone == false && isLoading -> {
                             OnboardingScreen(
                                 onFinished = {
@@ -111,7 +107,9 @@ class MainActivity : ComponentActivity() {
                                     Image(
                                         painter = painterResource(R.drawable.img_logo),
                                         contentDescription = "Logo",
-                                        modifier = Modifier.size(136.dp).clip(RoundedCornerShape(20.dp))
+                                        modifier = Modifier
+                                            .size(136.dp)
+                                            .clip(RoundedCornerShape(20.dp))
                                     )
                                     Spacer(modifier = Modifier.height(32.dp))
                                     TimedLinearProgress(5000)
@@ -119,7 +117,7 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
-                        onboardingDone == true && isLoading-> {
+                        onboardingDone == true && isLoading -> {
                             Navigation(
                                 modifier = Modifier,
                                 paddingTop = systemBarHeight,
@@ -140,11 +138,20 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+    override fun onStop() {
+        super.onStop()
+        Log.d("Lifecycle", "onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("Lifecycle", "onDestroy")
+    }
 }
 
 @Composable
 fun TimedLinearProgress(durationMillis: Int = 2000) {
-    var progress by remember { mutableStateOf(0f) }
+    var progress by remember { mutableFloatStateOf(0f) }
 
     LaunchedEffect(Unit) {
         animate(
@@ -161,4 +168,3 @@ fun TimedLinearProgress(durationMillis: Int = 2000) {
         modifier = Modifier
     )
 }
-

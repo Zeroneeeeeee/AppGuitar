@@ -147,7 +147,7 @@ fun RecordingItem(
             .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Thông tin
+
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = recording.name,
@@ -175,7 +175,12 @@ fun RecordingItem(
                 .size(32.dp)
                 .background(Color.Black, CircleShape)
                 .padding(4.dp)
-                .clickable(onClick = { toTutorial(recording.sequence) })
+                .clickable(onClick = {
+                    if (type == localizedContext.resources.getString(R.string.tutorial)) {
+                        toTutorial(recording.sequence)
+                    }
+                    else onPlayClick(recording.id)
+                })
         )
 
         Spacer(modifier = Modifier.width(8.dp))

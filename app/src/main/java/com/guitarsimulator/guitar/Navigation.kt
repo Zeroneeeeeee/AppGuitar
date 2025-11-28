@@ -1,16 +1,28 @@
 package com.guitarsimulator.guitar
 
+import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.Window
 import android.widget.Toast
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -18,13 +30,17 @@ import androidx.navigation3.runtime.entry
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.guitarsimulator.guitar.utils.Screen
+import com.guitarsimulator.guitar.utils.UserPreferences
 import com.guitarsimulator.guitar.view.home.HomeScreen
+import com.guitarsimulator.guitar.view.home.updateLocale
 import com.guitarsimulator.guitar.view.playingguitar.PlayingGuitarScreen
 import com.guitarsimulator.guitar.view.policy.PolicyScreen
 import com.guitarsimulator.guitar.view.recordplaylist.RecordPlaylistScreen
 import com.guitarsimulator.guitar.view.setting.LanguageScreen
 import com.guitarsimulator.guitar.view.setting.SettingScreen
 import com.guitarsimulator.guitar.view.setting.languages
+import kotlinx.coroutines.delay
+import java.util.Locale
 
 @Composable
 fun Navigation(
@@ -38,11 +54,21 @@ fun Navigation(
 ) {
     val backStack = remember { mutableStateListOf<Screen>(Screen.Home) }
     val windowInsertController = WindowCompat.getInsetsController(window, window.decorView)
+    val activity = LocalActivity.current
+    if (backStack.isEmpty()) {
+        DisposableEffect(Unit) {
+            activity?.finish()
+            onDispose {
+            }
+        }
+    }
 
     NavDisplay(
         modifier = modifier,
         backStack = backStack,
-        onBack = { backStack.removeLastOrNull() },
+        onBack = {
+            backStack.removeLastOrNull()
+        },
         entryProvider = entryProvider {
             entry<Screen.Home> {
                 HomeScreen(
@@ -81,7 +107,7 @@ fun Navigation(
                     },
                     localizedContext = localizedContext,
                     window = window,
-                    modifier = Modifier.padding(top = paddingTop, bottom = paddingBottom)
+                    modifier = Modifier.padding(top = paddingTop+16.dp, bottom = paddingBottom)
                 )
             }
             entry<Screen.Guitar> { (listNotes, tutorial) ->
@@ -121,8 +147,7 @@ fun Navigation(
                     },
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.background)
-                        .padding(top = paddingTop, bottom = paddingBottom)
-                    ,
+                        .padding(top = paddingTop+16.dp, bottom = paddingBottom),
                     localizedContext = localizedContext,
                     language = languages.find { it.id == language }!!.language
                 )
@@ -134,8 +159,7 @@ fun Navigation(
                     },
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.background)
-                        .padding(top = paddingTop, bottom = paddingBottom)
-                            ,
+                        .padding(top = paddingTop +16.dp, bottom = paddingBottom),
                     localizedContext = localizedContext,
                     getLocale = getLocale,
                     language = language
@@ -150,10 +174,11 @@ fun Navigation(
                         backStack.removeLastOrNull()
                     },
                     toTutorial = {
-                        if(isTabVisible) {
+                        if (isTabVisible) {
                             backStack.removeLastOrNull()
                         }
-                        backStack[backStack.lastIndex] = Screen.Guitar(listNote = it, isTutorial = true)
+                        backStack[backStack.lastIndex] =
+                            Screen.Guitar(listNote = it, isTutorial = true)
                         Toast.makeText(
                             localizedContext,
                             localizedContext.getString(R.string.press_on_green_area_to_play),
@@ -166,7 +191,7 @@ fun Navigation(
                     modifier = Modifier,
                     window = window,
                     toGuitarScreen = {
-                        if(isTabVisible) backStack.removeLastOrNull()
+                        if (isTabVisible) backStack.removeLastOrNull()
                         else backStack[backStack.lastIndex] = Screen.Guitar()
                     }
                 )

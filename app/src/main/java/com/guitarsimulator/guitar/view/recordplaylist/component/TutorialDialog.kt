@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.guitarsimulator.guitar.R
 
 @Composable
-fun TutorialDialog(onDismiss: () -> Unit = {}, localizedContext: Context) {
+fun TutorialDialog(onDismiss: () -> Unit = {}, localizedContext: Context, tutorials: List<Tutorial>) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -50,25 +50,14 @@ fun TutorialDialog(onDismiss: () -> Unit = {}, localizedContext: Context) {
                 interactionSource = remember { MutableInteractionSource() },
                 onClick = {}
             ),
-            localizedContext = localizedContext
+            localizedContext = localizedContext,
+            tutorials = tutorials
         )
     }
 }
 
 @Composable
-fun Content(modifier: Modifier = Modifier, onDismiss: () -> Unit = {}, localizedContext: Context) {
-    val recordings = listOf(
-        Tutorial(R.drawable.img_recordings_tutor_1,
-            localizedContext.getString(R.string.click_on_a_recording_to_play_it)
-        ),
-        Tutorial(R.drawable.img_recordings_tutor_2,
-            localizedContext.getString(R.string.click_on_the_play_button_to_start_tutorial)
-        ),
-        Tutorial(
-            R.drawable.img_recordings_tutor_3,
-            localizedContext.getString(R.string.click_on_options_icon_to_rename_or_delete_the_recording)
-        ),
-    )
+fun Content(modifier: Modifier = Modifier, onDismiss: () -> Unit = {}, localizedContext: Context, tutorials: List<Tutorial>) {
     var index by remember { mutableIntStateOf(0) }
     Column(
         modifier = modifier
@@ -76,7 +65,7 @@ fun Content(modifier: Modifier = Modifier, onDismiss: () -> Unit = {}, localized
             .background(MaterialTheme.colorScheme.background, RoundedCornerShape(10.dp))
             .padding(16.dp)
     ) {
-        Showcase(modifier = Modifier.fillMaxWidth(), tutorial = recordings[index])
+        Showcase(modifier = Modifier.fillMaxWidth(), tutorial = tutorials[index])
         Spacer(modifier.height(16.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -92,12 +81,12 @@ fun Content(modifier: Modifier = Modifier, onDismiss: () -> Unit = {}, localized
             }
             Button(
                 onClick = {
-                    if (index == recordings.size - 1) onDismiss()
-                    index = (index + 1).coerceAtMost(recordings.size - 1)
+                    if (index == tutorials.size - 1) onDismiss()
+                    index = (index + 1).coerceAtMost(tutorials.size - 1)
                 }
             ) {
                 Text(
-                    text = if (index == recordings.size - 1) localizedContext.getString(R.string.done) else localizedContext.getString(
+                    text = if (index == tutorials.size - 1) localizedContext.getString(R.string.done) else localizedContext.getString(
                         R.string.next
                     )
                 )
@@ -105,11 +94,6 @@ fun Content(modifier: Modifier = Modifier, onDismiss: () -> Unit = {}, localized
         }
     }
 }
-
-data class Tutorial(
-    val image: Int,
-    val description: String
-)
 
 @Composable
 fun Showcase(

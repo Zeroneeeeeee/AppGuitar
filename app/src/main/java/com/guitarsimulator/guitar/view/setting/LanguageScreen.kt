@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.guitarsimulator.guitar.R
 import com.guitarsimulator.guitar.utils.SharedPreference
+import kotlinx.coroutines.delay
 
 class Language(
     val icon: Int,
@@ -62,6 +64,13 @@ fun LanguageScreen(
 ) {
 
     var selected by remember { mutableStateOf(language) }
+    var isBackClicked by remember { mutableStateOf(true) }
+    LaunchedEffect(isBackClicked) {
+        if (!isBackClicked) {
+            delay(2000)
+            isBackClicked = true
+        }
+    }
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -70,7 +79,12 @@ fun LanguageScreen(
         Header(
             modifier = Modifier.padding(bottom = 16.dp),
             title = localizedContext.resources.getString(R.string.language),
-            onBack = onBack
+            onBack = {
+                if (isBackClicked) {
+                    isBackClicked = false
+                    onBack()
+                }
+            }
         )
         Spacer(Modifier.height(16.dp))
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
@@ -81,7 +95,7 @@ fun LanguageScreen(
                     isSelected = selected == it.id,
                     onSelected = {
                         selected = it.id
-                        SharedPreference.saveLanguage(localizedContext,it.id)
+                        SharedPreference.saveLanguage(localizedContext, it.id)
                         getLocale(it.id)
                     }
                 )

@@ -18,6 +18,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,16 +34,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import com.guitarsimulator.guitar.R
+import kotlinx.coroutines.delay
 
 @Composable
 fun SettingScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit = {},
     toLanguageScreen: () -> Unit = {},
-    toPolicyScreen:()-> Unit = {},
+    toPolicyScreen: () -> Unit = {},
     localizedContext: Context,
     language: String
 ) {
+    var isBackClicked by remember { mutableStateOf(true) }
+    LaunchedEffect(isBackClicked) {
+        if (!isBackClicked) {
+            delay(2000)
+            isBackClicked = true
+        }
+    }
     Column(
         modifier
             .fillMaxSize()
@@ -46,7 +59,12 @@ fun SettingScreen(
     ) {
         Header(
             title = localizedContext.resources.getString(R.string.settings),
-            onBack = onBack,
+            onBack = {
+                if (isBackClicked) {
+                    isBackClicked = false
+                    onBack()
+                }
+            },
             modifier = Modifier.padding(bottom = 16.dp)
         )
         Text(
@@ -163,7 +181,10 @@ fun GeneralChoices(
                         localizedContext.resources.getString(R.string.share_this_app) -> {
                             val sendIntent = Intent().apply {
                                 action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.guitarsimulator.guitar")
+                                putExtra(
+                                    Intent.EXTRA_TEXT,
+                                    "https://play.google.com/store/apps/details?id=com.guitarsimulator.guitar"
+                                )
                                 type = "text/plain"
                             }
 
@@ -188,8 +209,11 @@ fun GeneralChoices(
                             if (intent.resolveActivity(context.packageManager) != null) {
                                 context.startActivity(intent)
                             } else {
-                                Toast.makeText(context,
-                                    localizedContext.getString(R.string.no_browser_found), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    localizedContext.getString(R.string.no_browser_found),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
 
                         }

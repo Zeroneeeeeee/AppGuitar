@@ -4,10 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.Window
 import android.widget.Toast
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -106,6 +110,7 @@ fun GuitarFingerBoard(
     var time by remember { mutableLongStateOf(0L) }
     var isRunning by remember { mutableStateOf(false) }
     var startTime by remember { mutableLongStateOf(0L) }
+
     LaunchedEffect(isRunning) {
         while (isRunning) {
             delay(1000)
@@ -307,8 +312,7 @@ fun GuitarFingerBoard(
                         isMirrored = isMirrored,
                         onNotePlayed = viewModel::onGuitarFretClicked,
                         modifier = Modifier.align(Alignment.Center),
-                        isTutorial = isTutorial,
-                        onBack = onBack
+                        isTutorial = isTutorial
                     )
 
                     GuitarString(
@@ -359,6 +363,11 @@ fun GuitarFingerBoard(
                             )
                             .graphicsLayer(if (isMirrored) -1f else 1f)
                             .align(Alignment.CenterEnd)
+                            .clickable(
+                                indication = null,
+                                interactionSource = null,
+                                onClick = {}
+                            )
                     )
                 }
             }
@@ -416,7 +425,6 @@ fun GuitarHorizontalGrid(
     getPlayingString: (Int) -> Unit = {},
     listFret: List<Int> = listOf(-1, -1, -1, -1, -1, -1),
     onNotePlayed: (baseNote: String, fret: Int) -> Unit,
-    onBack: () -> Unit = {}
 ) {
     val stringNames = remember { listOf("E2", "A2", "D3", "G3", "B3", "E4") }
     val frets = 23
@@ -447,12 +455,14 @@ fun GuitarHorizontalGrid(
                 val targetPx = with(density) { targetIndex * fretWidth.toPx() + offsetPx }
 
                 coroutineScope.launch {
+                    delay(100)
                     scrollState.animateScrollTo(
                         value = targetPx.toInt()
                     )
                 }
             }
         }
+
         if (isTutorial && listNote.getOrNull(activeHighlightIndex) == null) {
             Toast.makeText(
                 context,
@@ -591,8 +601,7 @@ fun GuitarHorizontalGrid(
 
                                     val fret = ((pos.x / fretWidthPx)
                                         .toInt()
-                                        .coerceIn(0, frets - 1)) + 1
-
+                                        .coerceIn(0, frets - 2)) + 1
 
                                     val last = pointerState[change.id]
                                     val lastString = last?.first
@@ -678,6 +687,26 @@ fun GuitarHorizontalGrid(
                                     val isActive = activeNote != null &&
                                             fret == activeNote.fret &&
                                             string == activeNote.baseNote.baseNoteToString()
+                                    val isOn =
+                                        fret == draggingFret && string == draggingString || isActive
+
+                                    var alphaTarget by remember { mutableFloatStateOf(0f) }
+
+                                    LaunchedEffect(isOn) {
+                                        alphaTarget = if (isOn) {
+                                            1f
+                                        } else {
+                                            0f
+                                        }
+                                    }
+
+                                    val highlightAlpha by animateFloatAsState(
+                                        targetValue = alphaTarget,
+                                        animationSpec = tween(
+                                            durationMillis = if (alphaTarget == 0f) 1000 else 0,
+                                            easing = LinearOutSlowInEasing
+                                        )
+                                    )
                                     Box(
                                         modifier = Modifier
                                             .width(fretWidth)
@@ -685,19 +714,21 @@ fun GuitarHorizontalGrid(
                                             .drawBehind {
                                                 val strokeWidth = 2.dp.toPx()
                                                 val x = size.width - strokeWidth / 2
-                                                drawLine(
-                                                    color = Color(0xFFAAAAAA),
-                                                    start = Offset(x, 0f),
-                                                    end = Offset(x, size.height),
-                                                    strokeWidth = strokeWidth
-                                                )
+                                                if (fret in 0..21) {
+                                                    drawLine(
+                                                        color = Color(0xFFAAAAAA),
+                                                        start = Offset(x, 0f),
+                                                        end = Offset(x, size.height),
+                                                        strokeWidth = strokeWidth
+                                                    )
+                                                }
                                             }
                                             .onSizeChanged { it -> boxHeight = it.height.toFloat() }
                                             .clipToBounds()
                                             .drawBehind {
-                                                if (fret == draggingFret && string == draggingString || isActive) {
+                                                if (highlightAlpha > 0f) {
                                                     drawRect(
-                                                        color = Color.Cyan.copy(alpha = 0.2f),
+                                                        color = Color.Cyan.copy(alpha = 0.25f * highlightAlpha),
                                                         size = Size(
                                                             width = fretWidth.toPx(),
                                                             height = boxHeight
@@ -706,20 +737,19 @@ fun GuitarHorizontalGrid(
                                                     )
                                                 }
                                             },
-                                        contentAlignment = Alignment.TopEnd
+                                        contentAlignment = Alignment.TopStart
                                     ) {
                                         if (showIndex) {
                                             if (string == 0) {
                                                 Text(
-                                                    text = fret.toString(),
+                                                    text = if (fret in 0..22) fret.toString() else "",
                                                     color = Color.Gray,
                                                     modifier = Modifier
-                                                        .padding(end = 8.dp)
+                                                        .padding(start = 8.dp)
                                                         .graphicsLayer(if (isMirrored) -1f else 1f)
                                                 )
                                             }
                                         }
-
                                     }
                                 }
                             }
