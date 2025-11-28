@@ -27,7 +27,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.guitarsimulator.guitar.R
 
@@ -95,6 +97,7 @@ fun Content(modifier: Modifier = Modifier, onDismiss: () -> Unit = {}, localized
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 fun Showcase(
     modifier: Modifier = Modifier,
@@ -105,11 +108,11 @@ fun Showcase(
 ) {
     Column(
         modifier = modifier
-            .width(270.dp)
     ) {
         Image(
             painter = painterResource(tutorial.image),
             contentDescription = "Recordings",
+            contentScale = ContentScale.FillWidth,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier.height(16.dp))
