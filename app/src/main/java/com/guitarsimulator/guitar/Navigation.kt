@@ -110,7 +110,7 @@ fun Navigation(
                     modifier = Modifier.padding(top = paddingTop+16.dp, bottom = paddingBottom)
                 )
             }
-            entry<Screen.Guitar> { (listNotes, tutorial) ->
+            entry<Screen.Guitar> { (listNotes, tutorial,playback) ->
                 PlayingGuitarScreen(
                     onBack = {
                         backStack.removeLastOrNull()
@@ -131,6 +131,7 @@ fun Navigation(
                     window = window,
                     listNotes = listNotes,
                     isTutorial = tutorial,
+                    isPlayback = playback,
                     localizedContext = localizedContext
                 )
             }
@@ -179,6 +180,18 @@ fun Navigation(
                         }
                         backStack[backStack.lastIndex] =
                             Screen.Guitar(listNote = it, isTutorial = true)
+                        Toast.makeText(
+                            localizedContext,
+                            localizedContext.getString(R.string.press_on_green_area_to_play),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    },
+                    onPlayback = {
+                        if (isTabVisible) {
+                            backStack.removeLastOrNull()
+                        }
+                        backStack[backStack.lastIndex] =
+                            Screen.Guitar(listNote = it, isPlayback = true)
                         Toast.makeText(
                             localizedContext,
                             localizedContext.getString(R.string.press_on_green_area_to_play),

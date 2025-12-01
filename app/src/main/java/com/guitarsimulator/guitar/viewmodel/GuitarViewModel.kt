@@ -6,10 +6,10 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.guitarsimulator.guitar.repository.impl.NoteEventImpl
-import com.guitarsimulator.guitar.repository.impl.RecordingImpl
 import com.guitarsimulator.guitar.dtmodels.NoteEventVM
 import com.guitarsimulator.guitar.dtmodels.RecordingVM
+import com.guitarsimulator.guitar.repository.impl.NoteEventImpl
+import com.guitarsimulator.guitar.repository.impl.RecordingImpl
 import com.guitarsimulator.guitar.utils.SoundManager
 import com.guitarsimulator.guitar.utils.toNoteEvent
 import com.guitarsimulator.guitar.utils.toNoteEventVM
@@ -38,6 +38,9 @@ class GuitarViewModel(application: Application) : AndroidViewModel(application) 
 
     private val _recordings = MutableStateFlow<List<RecordingVM>>(emptyList())
     val recordings: StateFlow<List<RecordingVM>> = _recordings.asStateFlow()
+
+    private val _currentPlayingNote = MutableStateFlow<NoteEventVM?>(null)
+    val currentPlayingNote: StateFlow<NoteEventVM?> = _currentPlayingNote.asStateFlow()
 
     val recordedSequence = mutableStateListOf<NoteEventVM>()
     private var recordingStartTime: Long = 0
@@ -70,7 +73,7 @@ class GuitarViewModel(application: Application) : AndroidViewModel(application) 
             soundManager.playHandSlap()
         }
     }
-    
+
     fun startRecording() {
         if (_isPlaying.value) return
         recordedSequence.clear()
@@ -78,7 +81,7 @@ class GuitarViewModel(application: Application) : AndroidViewModel(application) 
         _isRecording.value = true
     }
 
-    fun stopRecording( getDuration:(Long)->Unit = {}) {
+    fun stopRecording(getDuration: (Long) -> Unit = {}) {
         if (!_isRecording.value) return
         val duration = System.currentTimeMillis() - recordingStartTime
         _isRecording.value = false
@@ -153,11 +156,15 @@ class GuitarViewModel(application: Application) : AndroidViewModel(application) 
                     val rate = 2f.pow(currentNoteEvent.fret / 12f)
                     withContext(Dispatchers.Main) {
                         soundManager.playNote(currentNoteEvent.baseNote, rate)
+                        _currentPlayingNote.value = currentNoteEvent
                     }
                     noteIndex++
                 }
             }
-            withContext(Dispatchers.Main) { _isPlaying.value = false }
+            withContext(Dispatchers.Main) {
+                _isPlaying.value = false
+                _currentPlayingNote.value = null
+            }
         }
     }
 
@@ -178,6 +185,7 @@ class GuitarViewModel(application: Application) : AndroidViewModel(application) 
     fun stopPlayback() {
         playbackJob?.cancel()
         _isPlaying.value = false
+        _currentPlayingNote.value = null
     }
 
     fun renderToWavBuffer(recording: RecordingVM): ShortArray {

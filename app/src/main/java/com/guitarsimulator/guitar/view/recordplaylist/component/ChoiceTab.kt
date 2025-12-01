@@ -53,7 +53,6 @@ fun ChoiceTab(
                 tab = tab,
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-
                     selectedTab = tab.title
                     getSelectedTab(selectedTab)
                 },

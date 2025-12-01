@@ -32,7 +32,9 @@ fun Content(
     isTabVisible: Boolean = true,
     onRenameClick: (RecordingVM) -> Unit,
     onDeleteClick: (Long) -> Unit,
+    onPlayback: (List<NoteEventVM>) -> Unit,
     toTutorial: (List<NoteEventVM>) -> Unit,
+    getSelectedTab: (String) -> Unit,
     localizedContext: Context,
     toGuitarScreen: () -> Unit
 ) {
@@ -59,6 +61,7 @@ fun Content(
                     getSelectedTab = {
                         if (selectedTab != it) viewModel.stopPlayback()
                         selectedTab = it
+                        getSelectedTab(it)
                     }
                 )
                 Spacer(modifier = Modifier.padding(horizontal = 8.dp))
@@ -67,8 +70,9 @@ fun Content(
                 recordings = recordings,
                 isPlaying = isPlaying,
                 onPlayClick = { recording ->
-                    if (isPlaying) viewModel.stopPlayback()
-                    else viewModel.startPlayback(recording.sequence)
+//                    if (isPlaying) viewModel.stopPlayback()
+//                    else viewModel.startPlayback(recording.sequence)
+                    onPlayback(recording.sequence)
                 },
                 onExportClick = viewModel::exportRecording,
                 onRenameClick = {

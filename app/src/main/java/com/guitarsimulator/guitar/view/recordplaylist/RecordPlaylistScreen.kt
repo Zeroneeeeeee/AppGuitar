@@ -37,6 +37,7 @@ fun RecordPlaylistScreen(
     viewModel: GuitarViewModel = viewModel(),
     onBack: () -> Unit = {},
     toTutorial: (List<NoteEventVM>) -> Unit = {},
+    onPlayback: (List<NoteEventVM>) -> Unit = {},
     isTabVisible: Boolean = true,
     selectedTab: String = localizedContext.resources.getString(R.string.guitar_record),
     localizedContext: Context,
@@ -48,6 +49,7 @@ fun RecordPlaylistScreen(
     var previousName by remember { mutableStateOf("") }
     var exposeDelete by remember { mutableStateOf(false) }
     var exposeGuideline by remember { mutableStateOf(false) }
+    var currentTab by remember { mutableStateOf(selectedTab) }
 
     val context = LocalContext.current
     val activity = context as? Activity
@@ -120,12 +122,16 @@ fun RecordPlaylistScreen(
                     viewModel.stopPlayback()
                     toTutorial(it)
                 },
+                onPlayback = onPlayback,
                 localizedContext = localizedContext,
                 isTabVisible = isTabVisible,
                 selectedTab = selectedTab,
                 toGuitarScreen = {
                     viewModel.stopPlayback()
                     toGuitarScreen()
+                },
+                getSelectedTab = {
+                    currentTab = it
                 }
             )
         }
@@ -161,10 +167,11 @@ fun RecordPlaylistScreen(
             )
         }
         if (exposeGuideline) {
+            Log.d("exposeGuideline", currentTab)
             TutorialDialog(
                 onDismiss = { exposeGuideline = false },
                 localizedContext = localizedContext,
-                tutorials = if(selectedTab == localizedContext.resources.getString(R.string.guitar_record)) recordingTutorials else learningTutorials
+                tutorials = if(currentTab == localizedContext.resources.getString(R.string.guitar_record)) recordingTutorials else learningTutorials
             )
         }
     }

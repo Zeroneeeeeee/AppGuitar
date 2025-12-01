@@ -33,6 +33,7 @@ fun PlayingGuitarScreen(
     window: Window,
     localizedContext: Context,
     isTutorial: Boolean = false,
+    isPlayback: Boolean = false,
     listNotes: List<NoteEventVM> = emptyList(),
     toTunerClick: () -> Unit = {},
     onBack: () -> Unit = {},
@@ -90,6 +91,7 @@ fun PlayingGuitarScreen(
                 toPlaylist()
             },
             isTutorial = isTutorial,
+            isPlayback = isPlayback,
             isMetronomeOn = isMetronomeOn,
             onMetronomeClick = {
                 isMetronomeOn = it

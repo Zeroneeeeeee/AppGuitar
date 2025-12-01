@@ -2,6 +2,7 @@ package com.guitarsimulator.guitar.view.playingguitar.component
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.Window
 import android.widget.Toast
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -34,6 +35,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -79,6 +81,7 @@ fun GuitarFingerBoard(
     modifier: Modifier = Modifier,
     isMetronomeOn: Boolean = false,
     isTutorial: Boolean = false,
+    isPlayback: Boolean = false,
     listNotes: List<NoteEventVM> = emptyList(),
     window: Window,
     onMetronomeClick: (Boolean) -> Unit = {},
@@ -90,13 +93,7 @@ fun GuitarFingerBoard(
 ) {
     val context = LocalContext.current
     val scrollState = rememberScrollState()
-
-    LaunchedEffect(Unit) {
-        viewModel.fetchRecordings()
-        if (!viewModel.isSoundManagerInitialized) {
-            viewModel.initialize(context)
-        }
-    }
+    val playedNotes by viewModel.currentPlayingNote.collectAsState()
 
     var isMirrored by remember { mutableStateOf(false) }
     val isRecording by viewModel.isRecording.collectAsState()
@@ -111,10 +108,36 @@ fun GuitarFingerBoard(
     var isRunning by remember { mutableStateOf(false) }
     var startTime by remember { mutableLongStateOf(0L) }
 
+    LaunchedEffect(Unit) {
+        viewModel.fetchRecordings()
+        if (!viewModel.isSoundManagerInitialized) {
+            viewModel.initialize(context)
+        }
+    }
+
+    LaunchedEffect(playedNotes) {
+        playingString = playedNotes?.baseNote?.baseNoteToString() ?: -1
+        trigger = System.currentTimeMillis()
+        Log.d("Trigger", "$trigger")
+        Log.d("PlayedNotes", "$playedNotes")
+    }
+
+    LaunchedEffect(isPlayback) {
+        if (isPlayback) {
+            viewModel.startPlayback(listNotes)
+        }
+    }
+
     LaunchedEffect(isRunning) {
         while (isRunning) {
             delay(1000)
             time = System.currentTimeMillis() - startTime
+        }
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            viewModel.stopPlayback()
         }
     }
 
@@ -195,14 +218,14 @@ fun GuitarFingerBoard(
                     Spacer(Modifier.width(8.dp))
 
                     IconButton(
-                        onClick = { toPlaylist() },
+                        onClick = { if (playedNotes != null) viewModel.stopPlayback() else toPlaylist() },
                         modifier = Modifier
                             .size(48.dp)
                             .border(1.dp, Color.White, CircleShape)
                             .clip(CircleShape)
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_play_arrow),
+                            painter = painterResource(if (playedNotes != null) R.drawable.ic_stop else R.drawable.ic_play_arrow),
                             contentDescription = "Start/Stop Playback",
                             tint = Color.White
                         )
@@ -305,6 +328,7 @@ fun GuitarFingerBoard(
                             trigger = System.currentTimeMillis()
                         },
                         listNote = listNotes,
+                        playingNote = playedNotes,
                         columnWidthDp = columnWidthDp,
                         columnHeightDp = columnHeightDp,
                         listFret = listFret,
@@ -312,7 +336,8 @@ fun GuitarFingerBoard(
                         isMirrored = isMirrored,
                         onNotePlayed = viewModel::onGuitarFretClicked,
                         modifier = Modifier.align(Alignment.Center),
-                        isTutorial = isTutorial
+                        isTutorial = isTutorial,
+                        isPlayback = isPlayback
                     )
 
                     GuitarString(
@@ -328,23 +353,28 @@ fun GuitarFingerBoard(
                         onChordSelected = {
                             when (it) {
                                 "G" -> {
-                                    listFret.clear(); listFret.addAll(listOf(3, 2, 0, 0, 0, 3))
+                                    listFret.clear()
+                                    listFret.addAll(listOf(3, 2, 0, 0, 0, 3))
                                 }
 
                                 "Em" -> {
-                                    listFret.clear(); listFret.addAll(listOf(0, 2, 2, 0, 0, 0))
+                                    listFret.clear()
+                                    listFret.addAll(listOf(0, 2, 2, 0, 0, 0))
                                 }
 
                                 "Am" -> {
-                                    listFret.clear(); listFret.addAll(listOf(0, 0, 2, 2, 1, 0))
+                                    listFret.clear()
+                                    listFret.addAll(listOf(0, 0, 2, 2, 1, 0))
                                 }
 
                                 "F" -> {
-                                    listFret.clear(); listFret.addAll(listOf(1, 3, 3, 2, 1, 1))
+                                    listFret.clear()
+                                    listFret.addAll(listOf(1, 3, 3, 2, 1, 1))
                                 }
 
                                 "C" -> {
-                                    listFret.clear(); listFret.addAll(listOf(0, 3, 2, 0, 1, 0))
+                                    listFret.clear()
+                                    listFret.addAll(listOf(0, 3, 2, 0, 1, 0))
                                 }
 
                                 "" -> {
@@ -420,12 +450,17 @@ fun GuitarHorizontalGrid(
     columnWidthDp: Dp,
     isTutorial: Boolean = false,
     showIndex: Boolean = false,
+    isPlayback: Boolean,
     isMirrored: Boolean,
+    playingNote: NoteEventVM? = null,
     listNote: List<NoteEventVM> = emptyList(),
     getPlayingString: (Int) -> Unit = {},
     listFret: List<Int> = listOf(-1, -1, -1, -1, -1, -1),
     onNotePlayed: (baseNote: String, fret: Int) -> Unit,
 ) {
+    LaunchedEffect(playingNote) {
+        Log.d("PlayingNote", "Playing note: ${playingNote}")
+    }
     val stringNames = remember { listOf("E2", "A2", "D3", "G3", "B3", "E4") }
     val frets = 23
     val fretWidth = 100.dp
@@ -441,12 +476,12 @@ fun GuitarHorizontalGrid(
     val coroutineScope = rememberCoroutineScope()
     val density = LocalDensity.current
 
-    LaunchedEffect(activeHighlightIndex) {
-        val activeNote = listNote.getOrNull(activeHighlightIndex)
+    val activeNote = if (isPlayback) playingNote else listNote.getOrNull(activeHighlightIndex)
+
+    LaunchedEffect(activeNote) {
 
         if (activeNote != null) {
             val fretNumber = activeNote.fret
-
             val targetIndex = (fretNumber - 1)
             val totalItems = frets
 
@@ -455,7 +490,7 @@ fun GuitarHorizontalGrid(
                 val targetPx = with(density) { targetIndex * fretWidth.toPx() + offsetPx }
 
                 coroutineScope.launch {
-                    delay(100)
+                    if (!isPlayback) delay(100)
                     scrollState.animateScrollTo(
                         value = targetPx.toInt()
                     )
@@ -506,7 +541,6 @@ fun GuitarHorizontalGrid(
                                         onNotePlayed(baseNote, effectiveFret)
                                         getPlayingString(string)
 
-                                        val activeNote = listNote.getOrNull(activeHighlightIndex)
                                         if (activeNote != null &&
                                             fret == activeNote.fret &&
                                             string == activeNote.baseNote.baseNoteToString()
@@ -530,10 +564,9 @@ fun GuitarHorizontalGrid(
                     for (index in 0..5) {
                         val string = index % 6
                         val fret = 0
-                        val activeNote = listNote.getOrNull(activeHighlightIndex)
                         val isActive = activeNote != null &&
-                                fret == activeNote.fret &&
-                                string == activeNote.baseNote.baseNoteToString()
+                                (fret == activeNote.fret || fret == playingNote?.fret) &&
+                                (string == activeNote.baseNote.baseNoteToString() || string == playingNote?.baseNote?.baseNoteToString())
                         Box(
                             modifier = Modifier
                                 .width(columnWidthDp)
@@ -616,7 +649,6 @@ fun GuitarHorizontalGrid(
                                         onNotePlayed(baseNote, effectiveFret)
                                         getPlayingString(string)
 
-                                        val activeNote = listNote.getOrNull(activeHighlightIndex)
                                         if (activeNote != null &&
                                             fret == activeNote.fret &&
                                             string == activeNote.baseNote.baseNoteToString()
@@ -683,10 +715,9 @@ fun GuitarHorizontalGrid(
                                     .width(fretWidth)
                             ) {
                                 repeat(6) { string ->
-                                    val activeNote = listNote.getOrNull(activeHighlightIndex)
                                     val isActive = activeNote != null &&
-                                            fret == activeNote.fret &&
-                                            string == activeNote.baseNote.baseNoteToString()
+                                            (fret == activeNote.fret) &&
+                                            (string == activeNote.baseNote.baseNoteToString())
                                     val isOn =
                                         fret == draggingFret && string == draggingString || isActive
 
